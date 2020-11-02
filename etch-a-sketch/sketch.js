@@ -26,8 +26,8 @@ class grid {
         }
     }
     resizeSquare(inputSquare, x) {
-        inputSquare.block.style.height = this.WIDTH / x;
-        console.log("Resized square.");
+        let size = String(this.WIDTH / x) + "px";
+        inputSquare.block.style.height = size;
     }
     clearColor() {
         allSquares = document.querySelector(".square");
