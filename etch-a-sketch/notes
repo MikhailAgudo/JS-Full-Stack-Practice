@@ -1,0 +1,10 @@
+grid - has many -> squares
+grid
+    contains X by X amount of squares
+    changes size and clears everything when number is changed
+
+
+squares
+    change color when mouse hovers
+    clears when the clear button is pressed
+    (optional) only 10% black occurs on each pass
