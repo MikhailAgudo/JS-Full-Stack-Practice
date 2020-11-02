@@ -9,9 +9,6 @@ class grid {
         this.container.style.display = "grid";
         this.container.style.width = this.WIDTH_STR;
 
-        this.container.style.gridTemplateColumns = this.gridSizer(size);
-        this.container.style.gridTemplateRows = this.gridSizer(size);
-
         this.initializeSquares(size);
 
         this.buttonControls = document.createElement("div");
@@ -44,6 +41,9 @@ class grid {
         if(size > 100) {
             size = 100;
         }
+
+        this.container.style.gridTemplateColumns = this.gridSizer(size);
+        this.container.style.gridTemplateRows = this.gridSizer(size);
 
         let totalSquares = size * size;
         for (let i = 0; i < totalSquares; i++) {
