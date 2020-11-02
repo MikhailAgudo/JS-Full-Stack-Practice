@@ -18,6 +18,21 @@ class grid {
         this.buttonControls.style.display = "flex";
         this.buttonControls.style.flexDirection = "row";
 
+        this.clearButton = document.createElement("button");
+        this.clearButton.style.border = "1px solid black";
+        this.clearButton.style.padding = "1em";
+        this.clearButton.textContent = "Clear";
+        this.clearButton.addEventListener("click", (e) => {
+            this.clearColor();
+        });
+        this.buttonControls.appendChild(this.clearButton);
+
+        this.sizeInput = document.createElement("input");
+        this.sizeInput.type = "number";
+        this.sizeInput.style.border = "1px solid rgba(100, 100, 100, 0.5)";
+        this.buttonControls.appendChild(this.sizeInput);
+
+        this.body.appendChild(this.buttonControls);
         this.body.appendChild(this.container);
     }
     initializeSquares(size) {
@@ -36,8 +51,11 @@ class grid {
         return "repeat(" + value + ", auto)";
     }
     clearColor() {
-        allSquares = document.querySelector(".square");
-        allSquares.style.background = "white";
+        let allSquares = document.querySelectorAll(".square");
+        allSquares.forEach(function(item) {
+            item.style.background = "white";
+        });
+        console.log("Click!");
     }
 }
 
