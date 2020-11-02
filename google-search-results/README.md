@@ -1,0 +1,2 @@
+# google-search-results
+This is a small HTML5 project from the Odin Project. I enjoyed making this a lot, though it might look a little messy. It's my first real HTML5 project, intended to solidify the lessons I learned so far.

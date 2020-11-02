@@ -1,0 +1,1 @@
+This is Mikhail's first git project! (according to the Odin Project)

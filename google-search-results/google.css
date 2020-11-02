@@ -1,0 +1,344 @@
+header {
+    margin: 20px 50px 0 20px;
+    display: flex;
+    flex-direction: row;
+}
+header .logo {
+    padding: 10px 0 0 0;
+    max-height: 30px;
+}
+.main {
+    margin: 0 35% 0 4%;
+    display: flex;
+    width: 500%;
+    flex-direction: column;
+}
+.main .searchBar {
+    background-color: white;
+    border-radius: 150px;
+    border: 1px solid #ccc;
+    padding: 0.70em 16px;
+    display: flex;
+    flex-direction: row;
+}
+.main .searchBar:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 180, 226, 0.5)
+}
+.main .searchBar input {
+    font-size: 16px;
+    width: 100%;
+    border: 0 transparent;
+    display: flex;
+}
+.main .searchBar input:focus {
+    outline: none;
+}
+.main .searchBar a {
+    margin: 0 10px 0 10px;
+    align-self: center;
+}
+.main .buttonBar {
+    display: flex;
+    margin-top: 20px;
+}
+.main .buttonBar button {
+    background-color: transparent;
+    color: gray;
+    border: 0;
+    margin: 0.5em 10px 0 10px;
+    font-size: 13px;
+}
+.main .buttonBar button:focus {
+    outline: none;
+}
+.main #leftSide {
+    display: flex;
+    justify-self: flex-end;
+    margin-left: auto;
+}
+.main #selectedTab {
+    color: blue;
+}
+.main #selectedTab #blueUnderline {
+    background-color: blue;
+    margin: auto 0 0 0;
+    max-height: 1px;
+    min-width: 50px;
+}
+hr {
+    border: 1px rgba(0, 180, 226, 0.5);
+    box-shadow: 0 0 0px 3px rgba(0, 150, 196, 0.07);
+}
+.mainBody {
+    margin: 10px 0 0 13%;
+    width: 37em;
+    display: flex;
+    flex-direction: column;
+}
+#resultCount {
+    color: gray;
+    font-size: 15px;
+}
+#personalRemark {
+    text-align:justify;
+    max-width: 400px;
+    color: rgba(200, 200, 200, 1);
+    font-size: 12px;
+}
+.searchEntry {
+    margin: 2em 0 0 0;
+}
+.searchEntry #topDirectory strong {
+    color: rgb(90, 36, 36);
+}
+.searchEntry h1 {
+    padding: 0.5em 0 0.5em 0;
+}
+.searchEntry h1 a {
+    font-size: 22px;
+    color: blue;
+    text-decoration: none;
+}
+.searchEntry h1 a:hover {
+    text-decoration: underline;
+}
+.searchEntry p {
+    color: rgb(77, 80, 87);
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.searchEntry p strong {
+    font-weight: bold;
+}
+.searchEntry p #date {
+    color: rgba(77, 80, 87, 0.5);
+}
+.searchEntry .quickLinks {
+    padding-top: 0.5em;
+    display: flex;
+    flex-direction: row;
+}
+.searchEntry .quickLinks a {
+    margin: 0 5px 0 5px;
+    color: blue;
+    font-size: 15px;
+    text-decoration: none;
+}
+.searchEntry .quickLinks a:hover {
+    text-decoration: underline;
+}
+.peopleAlsoAsk {
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 10px;
+    margin: 2em 0 0 0;
+}
+.peopleAlsoAsk h2 {
+    font-size: 1.3em;
+}
+.peopleAlsoAsk p {
+    font-size: 1.1em;
+}
+.peopleAlsoAsk hr {
+    border: 1px solid black;
+    box-shadow: none;
+}
+.peopleAlsoAsk .pAASection {
+    border-top: 1px solid rgb(200, 200, 200);
+    padding: 0.8em;
+}
+.peopleAlsoAsk #topOne {
+    border-top: 0;
+}
+#feedbackButton {
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+    font-style: italic;
+    margin: 5px 0 0 auto;
+    text-decoration: none;
+}
+#feedbackButton:hover {
+    text-decoration: underline;
+}
+.searchSectionHeader {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0 0 0;
+}
+.searchSectionHeader h2{
+    font-size: 1.4em;
+    align-self: center;
+}
+.searchSectionHeader img {
+    margin: 0 10px 0 10px;
+    align-self: center;
+}
+.videoCardSection {
+    margin: 1em 0 1em 0;
+    display: flex;
+    flex-direction: row;
+}
+.videoCard {
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 10px;
+    margin: 0 3px 0 3px;
+}
+.videoCard img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+.videoCard .cardDescription {
+    padding: 0.5em;
+}
+.videoCard .cardDescription a {
+    font-size: 22px;
+    color: blue;
+    text-decoration: none;
+}
+.videoCard .cardDescription a:hover {
+    text-decoration: underline;
+}
+.videoCard .cardDescription p {
+    color: rgb(77, 80, 87);
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.5;
+}
+.videoCard .cardDescription p strong {
+    font-weight: bold
+}
+#viewAll {
+    display: flex;
+    flex-direction: row;
+}
+#viewAll hr {
+    border: 1px solid rgb(200, 200, 200);
+    box-shadow: none;
+    display: inline-block;
+    align-self: center;
+    position: absolute;
+    width: 37em;
+}
+#viewAll a {
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 100px;
+    padding: 0.5em 5em 0.5em 5em;
+    margin-left: 11.5em;
+    background-color: white;
+    text-decoration: none;
+    justify-self: center;
+}
+#viewAll a:hover {
+    background-color: rgb(250, 250, 250);
+}
+.imagesSection {
+    display: flex;
+    flex-direction: column;
+}
+.imagesSection .imageTags {
+    display: flex;
+    flex-direction: row;
+    margin: 1em 0 1em 0;
+}
+.imagesSection .imageTags a {
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 100px;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+    margin: 0 0.2em 0 0.2em;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+.imagesSection .imageTags a:hover {
+    background-color: rgb(250, 250, 250);
+}
+.imagesSection .imagesActual {
+    display: flex;
+    flex-direction: row;
+}
+.imagesSection .imagesActual .imageContainer {
+    object-fit: cover;
+    margin: 0 1px 0 1px;
+    max-width: 25%;
+}
+#reportImagesButton {
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+    margin: 5px 0 0 auto;
+    text-decoration: none;
+}
+#reportImagesButton:hover {
+    text-decoration: underline;
+}
+.relatedSearchSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    margin: 2em 0 2em 0;
+    grid-gap: 0.5em;
+}
+.relatedSearchSection a {
+    color: rgb(119, 12, 178);
+    text-decoration: none;
+}
+.relatedSearchSection a:hover {
+    text-decoration: underline;
+}
+.relatedSearchSection a strong {
+    font-weight: bold;
+}
+.pageLinks {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin: 1em 0 1em 0;
+}
+.pageLinks p {
+    color: black;
+    font-size: 15px;
+}
+.pageLinks a {
+    color: rgb(119, 12, 178);
+    text-decoration: none;
+    font-size: 15px;
+    margin: 0 0.3em 0 0.3em;
+}
+.pageLinks a:hover {
+    text-decoration: underline;
+}
+#nextButtonPages {
+    margin-left: 3em;
+}
+footer {
+    background-color: rgb(242, 242, 242);
+    background-size: auto;
+    margin-top: -1px;
+    display: flex;
+    flex-direction: column;
+    color: rgb(115, 117, 115);
+}
+footer .firstRow {
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid rgb(115, 117, 115);
+}
+footer .firstRow strong {
+    font-weight: bold;
+    border-left: 1px solid rgb(115, 117, 115);
+    padding-left: 0.5em;
+    color: rgb(60, 63, 67);
+}
+footer p {
+    margin: 0 0.5em 0 0.5em;
+}
+footer a {
+    color: rgb(115, 117, 115);
+    text-decoration: none;
+    padding-left: 0.5em;
+}
+footer a:hover {
+    text-decoration: underline;
+}
