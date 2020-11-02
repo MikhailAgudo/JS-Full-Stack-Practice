@@ -1,6 +1,6 @@
 class grid {
-    WIDTH_STR = "980px";
     WIDTH = 980;
+    WIDTH_STR = `${this.WIDTH}px`;
     container = "";
     body = document.querySelector("body");
 
