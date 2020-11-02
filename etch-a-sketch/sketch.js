@@ -18,10 +18,7 @@ class grid {
         this.buttonControls.style.display = "flex";
         this.buttonControls.style.flexDirection = "row";
 
-        this.clearButton = document.createElement("button");
-        this.clearButton.style.border = "1px solid black";
-        this.clearButton.style.padding = "1em";
-        this.clearButton.textContent = "Clear";
+        this.clearButton = this.makeNewButton("Clear");
         this.clearButton.addEventListener("click", (e) => {
             this.clearColor();
         });
@@ -32,10 +29,22 @@ class grid {
         this.sizeInput.style.border = "1px solid rgba(100, 100, 100, 0.5)";
         this.buttonControls.appendChild(this.sizeInput);
 
+        this.resizeButton = this.makeNewButton("Resize");
+        this.resizeButton.addEventListener("click", (e) => {
+            let newSize = this.sizeInput.value;
+            this.removeSquares();
+            this.initializeSquares(newSize);
+        });
+        this.buttonControls.appendChild(this.resizeButton);
+
         this.body.appendChild(this.buttonControls);
         this.body.appendChild(this.container);
     }
     initializeSquares(size) {
+        if(size > 100) {
+            size = 100;
+        }
+
         let totalSquares = size * size;
         for (let i = 0; i < totalSquares; i++) {
             const newSquare = new square();
@@ -43,9 +52,21 @@ class grid {
             this.container.appendChild(newSquare.block);
         }
     }
+    removeSquares() {
+        while(this.container.firstChild) {
+            this.container.removeChild(this.container.lastChild);
+        }
+    }
     resizeSquare(inputSquare, x) {
         let size = String(this.WIDTH / x) + "px";
         inputSquare.block.style.height = size;
+    }
+    makeNewButton(string) {
+        let button = document.createElement("button");
+        button.style.border = "1px solid black";
+        button.style.padding = "1em";
+        button.textContent = string;
+        return button;
     }
     gridSizer(value) {
         return "repeat(" + value + ", auto)";
