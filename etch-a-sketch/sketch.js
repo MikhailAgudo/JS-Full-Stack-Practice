@@ -83,6 +83,7 @@ class grid {
 class square {
     painted = false;
     block = "";
+    alpha = 0;
 
     constructor() {
         this.block = document.createElement("div");
@@ -91,12 +92,17 @@ class square {
         this.block.style.background = "white";
         //this.block.textContent = ".";
         this.block.addEventListener("mouseover", (e) => {
-            this.changeColor("black");
+            if(this.alpha < 100) {
+                this.alpha += 10;
+            }
+            this.changeColor(this.alpha);
         });
     }
 
-    changeColor(color) {
-        this.block.style.background = color;
+    changeColor(alpha) {
+        alpha = 255 - ((255 * alpha) / 100);
+        let background = `rgb(${alpha}, ${alpha}, ${alpha})`;
+        this.block.style.background = background;
     }
 }
 
