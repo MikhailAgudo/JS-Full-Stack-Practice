@@ -1,15 +1,18 @@
 class grid {
+    WIDTH_STR = "980px";
+    WIDTH = 980;
     container = "";
     body = document.querySelector("body");
 
     constructor(x, y) {
         this.container = document.createElement("div");
         this.container.style.display = "grid";
+        this.container.style.width = this.WIDTH_STR;
 
-        let xSize = this.gridSizer(x);
-        let ySize = this.gridSizer(y);
-        this.container.style.gridTemplateColumns = xSize;
-        this.container.style.gridTemplateRows = ySize;
+        this.container.style.gridTemplateColumns = "repeat(" + 
+            x + ", auto)";
+        this.container.style.gridTemplateRows = "repeat(" + 
+        y + ", auto)";
 
         this.initializeSquares(x, y);
         this.body.appendChild(this.container);
@@ -18,15 +21,13 @@ class grid {
         let totalSquares = x * y;
         for (let i = 0; i < totalSquares; i++) {
             const newSquare = new square();
+            this.resizeSquare(newSquare, x);
             this.container.appendChild(newSquare.block);
         }
     }
-    gridSizer(amount) {
-        let string = "";
-        for (let i = 0; i < amount; i++) {
-            string += "auto ";
-        }
-        return string;
+    resizeSquare(inputSquare, x) {
+        inputSquare.block.style.height = this.WIDTH / x;
+        console.log("Resized square.");
     }
     clearColor() {
         allSquares = document.querySelector(".square");
@@ -41,9 +42,12 @@ class square {
     constructor() {
         this.block = document.createElement("div");
         this.block.classList.add("square");
+        this.block.style.border = "1px solid rgb(150, 150, 150)"
         this.block.style.background = "white";
-        this.block.textContent = ".";
-        this.block.addEventListener("mouseover", this.changeColor("black"));
+        //this.block.textContent = ".";
+        this.block.addEventListener("mouseover", (e) => {
+            this.changeColor("black");
+        });
     }
 
     changeColor(color) {
