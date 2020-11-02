@@ -119,9 +119,13 @@ function playRound(playerSelection, computerSelection) {
     // Finally, determine what the returned string is.
     switch(roundResult) {
         case 0:
+            currentRound++;
+            computerPoints++;
             return "You lose! " + computerSelection + " beats " +
                 playerSelection + "!";
         case 1:
+            currentRound++;
+            playerPoints++;
             return "You win! " + playerSelection + " beats " +
                 computerSelection + "!";
         case 2:
@@ -204,25 +208,42 @@ const controls = document.createElement("div");
 controls.style.display = "flex";
 controls.style.flexDirection = "row";
 
-const rockBtn = document.createElement("button");
-rockBtn.style.borderRadius = "50px";
-rockBtn.style.border = "1px solid rgb(150,150,150)";
-rockBtn.style.background = "transparent";
-rockBtn.textContent = "Rock!";
+const roundWinner = document.createElement("p");
+roundWinner.textContent = "Click a button to play!";
 
-const paperBtn = document.createElement("button");
-paperBtn.style.borderRadius = "50px";
-paperBtn.style.border = "1px solid rgb(150,150,150)";
-paperBtn.style.background = "transparent";
-paperBtn.textContent = "Paper!";
+const scoreBoard = document.createElement("p");
+let playerPoints = 0;
+let computerPoints = 0;
+let currentRound = 0;
 
-const scissorsBtn = document.createElement("button");
-scissorsBtn.style.borderRadius = "50px";
-scissorsBtn.style.border = "1px solid rgb(150,150,150)";
-scissorsBtn.style.background = "transparent";
-scissorsBtn.textContent = "Scissors!"
+function newButton(text) {
+    const newBtn = document.createElement("button");
+    newBtn.style.borderRadius = "50px";
+    newBtn.style.border = "1px solid rgb(150,150,150)";
+    newBtn.style.background = "transparent";
+    newBtn.textContent = text + "!";
+    newBtn.addEventListener("click", function(e) {
+        if(currentRound < 5) {
+            roundWinner.textContent = playRound(text, computerPlay());
+            scoreBoard.textContent = "Welcome to Rock Paper Scissors!" + 
+            " This is round " + currentRound + " of 5!" + 
+            " You have " + playerPoints + " points, against " +
+            " the foe's " + computerPoints + "!";
+        } else if (playerPoints > computerPoints) {
+            roundWinner.textContent = "You win the game! Refresh to play again!";
+        } else if (computerPoints > playerPoints) {
+            roundWinner.textContent = "You lose the game! Refresh to play again!";
+        } else {
+            roundWinner.textContent = "Somehow, there was no winner?! Bug?";
+        }
+        
+    });
+    return newBtn;
+}
 
-controls.appendChild(rockBtn);
-controls.appendChild(paperBtn);
-controls.appendChild(scissorsBtn);
+body.appendChild(roundWinner);
+controls.appendChild(newButton("Rock"));
+controls.appendChild(newButton("Paper"));
+controls.appendChild(newButton("Scissors"));
 body.appendChild(controls);
+body.appendChild(scoreBoard);
