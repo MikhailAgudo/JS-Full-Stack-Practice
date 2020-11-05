@@ -58,16 +58,35 @@ class calculator {
         let operators = ["+", "-", "*", "/"];
         let firstFilter = [];
 
-        for (let i = 0; i < string.length; i++) {
-            if (i !== (string.length - 1)) {
-                
+        let i = 0;
+        for (let j = 0; j < string.length; j++) {
+            if (j !== (string.length - 1)) {
+                for (let k = 0; k < operators.length; k++) {
+                    if (string[j] === operators[k]) {
+                        firstFilter = this.sliceScreen(string, 
+                            firstFilter, i, j, false);
+                        i = j;
+                    }
+                }
+            } else {
+                firstFilter = this.sliceScreen(string, firstFilter,
+                    j, string.length, true);
             }
         }
+        console.log(firstFilter);
     }
 
-    readScreen() {
+    sliceScreen(string, firstFilter, i, j, isEnd) {
         // This method reads the string to help
-        // determineSteps(). Perhaps not needed?
+        // determineSteps().
+
+        let filterInput = string.slice(i, j);
+        firstFilter.push(filterInput);
+
+        if (isEnd === false) {
+            firstFilter.push(string.slice(j, j + 1));
+        }
+        return firstFilter;
     }
 
     add(input1, input2) {
@@ -86,3 +105,5 @@ class calculator {
 
     }
 }
+
+let calc = new calculator();
