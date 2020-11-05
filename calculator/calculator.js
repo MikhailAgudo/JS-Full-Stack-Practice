@@ -44,7 +44,8 @@ class calculator {
         // First, determineSteps() then calculate everything
         // one by one.
 
-
+        let screenArray = this.firstFilter(string);
+        screenArray = this.secondFilter(screenArray);
     }
 
     firstFilter(string) {
@@ -63,8 +64,8 @@ class calculator {
         let i = 0;
         for (let j = 0; j < string.length; j++) {
             if (j !== (string.length - 1)) {
-                for (let k = 0; k < OPERATORS.length; k++) {
-                    if (string[j] === OPERATORS[k]) {
+                for (let k = 0; k < this.OPERATORS.length; k++) {
+                    if (string[j] === this.OPERATORS[k]) {
                         screenArray = this.sliceScreen(string, 
                             screenArray, i, j, false);
                         i = j + 1;
@@ -80,7 +81,26 @@ class calculator {
     }
 
     secondFilter(screenArray) {
+        // Add the Ms, then Ds, then As, then Ss. Then
+        // splice them. The replaced value should be the calculation
 
+        this.multiplicationFilter(screenArray);
+    }
+
+    multiplicationFilter(screenArray) {
+        for (let i = 0; i < screenArray.length; i+=0) {
+            if (screenArray[i] === this.OPERATORS[0]) {
+                let input1 = parseInt(screenArray[i - 1]);
+                let input2 = parseInt(screenArray[i + 1]);
+                let result = this.multiply(input1, input2);
+                screenArray.splice((i - 1), 3, result);
+                i = 0;
+            } else {
+                i++;
+            }
+        }
+        console.log(screenArray);
+        return screenArray;
     }
 
     sliceScreen(string, firstFilter, i, j, isEnd) {
@@ -105,7 +125,7 @@ class calculator {
     }
 
     multiply(input1, input2) {
-
+        return input1 * input2;
     }
 
     divide(input1, input2) {
