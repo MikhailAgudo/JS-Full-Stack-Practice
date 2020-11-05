@@ -66,7 +66,9 @@ class calculator {
         }
 
         this.screenText = screenArray[0];
-        console.log(screenArray[0]);
+        console.log(typeof screenArray[0]);
+
+        return screenArray[0];
     }
 
     firstFilter(string) {
@@ -119,6 +121,10 @@ class calculator {
 
     MDFilter(screenArray) {
         for (let i = 0; i < screenArray.length; i+=0) {
+            if (this.checkError(screenArray)) {
+                console.log("MDFilter!");
+                return screenArray;
+            }
             if (screenArray[i] === this.OPERATORS[0]) {
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
@@ -127,9 +133,6 @@ class calculator {
                 i = 0;
                 console.log(screenArray);
             } else if (screenArray[i] === this.OPERATORS[1]) { 
-                if (this.checkError(screenArray)) {
-                    return screenArray;
-                }
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.divide(input1, input2);
@@ -247,11 +250,11 @@ function unitTest(calc) {
         console.log(`Third test: Fail, answer: ${calc.ERROR_DIVIDE_BY_ZERO}`);
     }
 
-    if (calc.calculate("99+2*5/5*0") === calc.ERROR_DIVIDE_BY_ZERO) {
+    if (calc.calculate("99+2*5/5*0") === (99 + 2 * 5 / 5 * 0)) {
         // Test zero error, but "disguised"
         console.log("Fourth test: Pass");
     } else {
-        console.log(`Fourth test: Fail, answer: ${calc.ERROR_DIVIDE_BY_ZERO}`);
+        console.log(`Fourth test: Fail, answer: ${99+2*5/5*0}`);
     }
 }
 
