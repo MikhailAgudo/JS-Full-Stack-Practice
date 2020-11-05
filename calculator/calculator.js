@@ -94,7 +94,7 @@ class calculator {
                 }
             } else {
                 screenArray = this.sliceScreen(string, screenArray,
-                    j, string.length, true);
+                    i, string.length, true);
             }
         }
         console.log(screenArray);
