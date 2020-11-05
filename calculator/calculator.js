@@ -168,7 +168,10 @@ class calculator {
         //console.log("Checking errors...");
         //console.log(`Error: ${typeof screenArray}, ${screenArray}`);
         if (typeof screenArray != "string"){
+            console.log(screenArray);
             screenArray = this.checkDivideZero(screenArray);
+            console.log(screenArray);
+            screenArray = this.checkDoubleOperator(screenArray);
         }
         
         for (let i = 0; i < this.ERRORS.length; i++) {
@@ -187,6 +190,24 @@ class calculator {
                 return this.ERROR_DIVIDE_BY_ZERO;
             }
         }
+        return screenArray;
+    }
+
+    checkDoubleOperator(screenArray) {
+        let isOperator = false;
+        for (let i = 0; i < screenArray.length; i++) {
+            for (let j = 0; j < this.OPERATORS.length; j++) {
+                if (screenArray[i] === this.OPERATORS[i] &&
+                    isOperator === true) {
+                    return this.ERROR_SYNTAX;
+                } else if (screenArray[i] === this.OPERATORS[i]) {
+                    isOperator = true;
+                } else {
+                    isOperator - false;
+                }
+            }
+        }
+        return screenArray;
     }
 
     add(input1, input2) {
