@@ -79,17 +79,17 @@ class calculator {
         let i = 0;
         for (let j = 0; j < string.length; j+=0) {
             let checkedChar = this.checkOperators(string[j]);
-            if (j === (string.length - 1)) {
+            if (checkedChar === true) {
+                screenArray = this.sliceScreen(string, 
+                    screenArray, i, j, false);
+                j++;
+                i = j;
+            } else if (j === (string.length - 1)) {
                 screenArray = this.sliceScreen(string, 
                     screenArray, i, string.length, false);
                 j++;
             } else if (checkedChar === false) {
                 j++;
-            } else {
-                screenArray = this.sliceScreen(string, 
-                    screenArray, i, j, false);
-                j++;
-                i = j;
             }
         }
         screenArray = this.removeDuds(screenArray);
