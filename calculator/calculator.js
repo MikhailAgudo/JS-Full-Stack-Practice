@@ -1,5 +1,8 @@
 class calculator {
     OPERATORS = ["*", "/", "+", "-"];
+    ERROR_DIVIDE_BY_ZERO = "ERROR: DIVIDING BY ZERO";
+    ERROR_SYNTAX = "SYNTAX ERROR";
+    ERRORS = [this.ERROR_DIVIDE_BY_ZERO, this.ERROR_SYNTAX];
     screen = document.createElement("div");
     screenText = screen.textContent;
 
@@ -45,7 +48,22 @@ class calculator {
         // one by one.
 
         let screenArray = this.firstFilter(string);
+
+        if (this.checkError(screenArray)) {
+            screenArray = this.checkError(screenArray);
+            this.screenText = screenArray;
+            return;
+        }
+
         screenArray = this.secondFilter(screenArray);
+
+        console.log(`Post Second: ${screenArray}`);
+
+        if (this.checkError(screenArray)) {
+            screenArray = this.checkError(screenArray);
+            this.screenText = screenArray;
+            return;
+        }
     }
 
     firstFilter(string) {
@@ -85,6 +103,13 @@ class calculator {
         // splice them. The replaced value should be the calculation
 
         this.multiplicationFilter(screenArray);
+        this.divisionFilter(screenArray);
+
+        if(this.checkError(screenArray)) {
+            return screenArray;
+        }
+
+        return screenArray;
     }
 
     multiplicationFilter(screenArray) {
@@ -93,6 +118,26 @@ class calculator {
                 let input1 = parseInt(screenArray[i - 1]);
                 let input2 = parseInt(screenArray[i + 1]);
                 let result = this.multiply(input1, input2);
+                screenArray.splice((i - 1), 3, result);
+                i = 0;
+            } else {
+                i++;
+            }
+        }
+        console.log(screenArray);
+        return screenArray;
+    }
+
+    divisionFilter(screenArray) {
+        console.log(`Division starts: ${screenArray}`);
+        if (this.checkError(screenArray)) {
+            return screenArray;
+        }
+        for (let i = 0; i < screenArray.length; i+=0) {
+            if (screenArray[i] === this.OPERATORS[1]) {
+                let input1 = parseInt(screenArray[i - 1]);
+                let input2 = parseInt(screenArray[i + 1]);
+                let result = this.divide(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
             } else {
@@ -116,6 +161,31 @@ class calculator {
         return firstFilter;
     }
 
+    checkError(screenArray) {
+        console.log("Checking errors...");
+        console.log(`Error: ${typeof screenArray}, ${screenArray}`);
+        if (typeof screenArray != "string"){
+            screenArray = this.checkDivideZero(screenArray);
+        }
+        
+        for (let i = 0; i < this.ERRORS.length; i++) {
+            if (screenArray === this.ERRORS[i]) {
+                return screenArray;
+            }
+        }
+    }
+
+    checkDivideZero(screenArray) {
+        console.log("Checking divide by zero errors...");
+        console.log(`Zero Error: ${typeof screenArray}, ${screenArray}`);
+        for (let i = 0; i < screenArray.length; i++) {
+            if (screenArray[i] == 0 && 
+                screenArray[i - 1] === this.OPERATORS[1]) {
+                return this.ERROR_DIVIDE_BY_ZERO;
+            }
+        }
+    }
+
     add(input1, input2) {
 
     }
@@ -129,7 +199,11 @@ class calculator {
     }
 
     divide(input1, input2) {
-
+        if (input1 === 0) {
+            return 1;
+        } else {
+            return input1 / input2;
+        }
     }
 }
 
