@@ -52,7 +52,7 @@ class calculator {
         if (this.checkError(screenArray)) {
             screenArray = this.checkError(screenArray);
             this.screenText = screenArray;
-            return;
+            return screenArray;
         }
 
         screenArray = this.secondFilter(screenArray);
@@ -62,7 +62,7 @@ class calculator {
         if (this.checkError(screenArray)) {
             screenArray = this.checkError(screenArray);
             this.screenText = screenArray;
-            return;
+            return screenArray;
         }
 
         this.screenText = screenArray[0];
@@ -122,8 +122,8 @@ class calculator {
     multiplicationFilter(screenArray) {
         for (let i = 0; i < screenArray.length; i+=0) {
             if (screenArray[i] === this.OPERATORS[0]) {
-                let input1 = parseInt(screenArray[i - 1]);
-                let input2 = parseInt(screenArray[i + 1]);
+                let input1 = parseFloat(screenArray[i - 1]);
+                let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.multiply(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
@@ -142,8 +142,8 @@ class calculator {
         }
         for (let i = 0; i < screenArray.length; i+=0) {
             if (screenArray[i] === this.OPERATORS[1]) {
-                let input1 = parseInt(screenArray[i - 1]);
-                let input2 = parseInt(screenArray[i + 1]);
+                let input1 = parseFloat(screenArray[i - 1]);
+                let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.divide(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
@@ -158,8 +158,8 @@ class calculator {
     additionFilter(screenArray) {
         for (let i = 0; i < screenArray.length; i+=0) {
             if (screenArray[i] === this.OPERATORS[2]) {
-                let input1 = parseInt(screenArray[i - 1]);
-                let input2 = parseInt(screenArray[i + 1]);
+                let input1 = parseFloat(screenArray[i - 1]);
+                let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.add(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
@@ -174,8 +174,8 @@ class calculator {
     subtractionFilter(screenArray) {
         for (let i = 0; i < screenArray.length; i+=0) {
             if (screenArray[i] === this.OPERATORS[3]) {
-                let input1 = parseInt(screenArray[i - 1]);
-                let input2 = parseInt(screenArray[i + 1]);
+                let input1 = parseFloat(screenArray[i - 1]);
+                let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.subtract(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
