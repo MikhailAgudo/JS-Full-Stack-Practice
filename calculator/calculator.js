@@ -217,7 +217,7 @@ class calculator {
         let isOperator = false;
         for (let i = 0; i < screenArray.length; i++) {
             if (this.checkOperators(screenArray[i]) === true && isOperator === true){
-
+                return this.ERROR_SYNTAX;
             } else if (this.checkOperators(screenArray[i])) {
                 isOperator = true;
             } else {
