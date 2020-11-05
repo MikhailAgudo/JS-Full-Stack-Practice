@@ -92,7 +92,7 @@ class calculator {
                 i = j;
             }
         }
-        screenArray.pop();
+        screenArray = this.removeDuds(screenArray);
         console.log(screenArray);
         return screenArray;
     }
@@ -106,6 +106,16 @@ class calculator {
         return false;
     }
 
+    removeDuds(screenArray) {
+        for (let i = 0; i < screenArray.length; i++) {
+            if (screenArray[i] === "") {
+                screenArray.splice(i, 1);
+                i--;
+            }
+        }
+        return screenArray;
+    }
+
     secondFilter(screenArray) {
         // Add the Ms, then Ds, then As, then Ss. Then
         // splice them. The replaced value should be the calculation
@@ -117,7 +127,6 @@ class calculator {
     }
 
     MDFilter(screenArray) {
-        console.log(`MDFilter: ${screenArray}`);
         for (let i = 0; i < screenArray.length; i+=0) {
             if (screenArray[i] === this.OPERATORS[0]) {
                 let input1 = parseFloat(screenArray[i - 1]);
@@ -182,12 +191,8 @@ class calculator {
     }
 
     checkError(screenArray) {
-        //console.log("Checking errors...");
-        //console.log(`Error: ${typeof screenArray}, ${screenArray}`);
         if (typeof screenArray != "string"){
-            console.log(screenArray);
             screenArray = this.checkDivideZero(screenArray);
-            console.log(screenArray);
             screenArray = this.checkDoubleOperator(screenArray);
         }
         
@@ -199,8 +204,6 @@ class calculator {
     }
 
     checkDivideZero(screenArray) {
-        //console.log("Checking divide by zero errors...");
-        //console.log(`Zero Error: ${typeof screenArray}, ${screenArray}`);
         for (let i = 0; i < screenArray.length; i++) {
             if (screenArray[i] == 0 && 
                 screenArray[i - 1] === this.OPERATORS[1]) {
