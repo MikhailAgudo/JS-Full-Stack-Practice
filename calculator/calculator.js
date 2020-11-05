@@ -64,6 +64,9 @@ class calculator {
             this.screenText = screenArray;
             return;
         }
+
+        this.screenText = screenArray[0];
+        console.log(screenArray[0]);
     }
 
     firstFilter(string) {
@@ -106,8 +109,12 @@ class calculator {
         this.divisionFilter(screenArray);
 
         if(this.checkError(screenArray)) {
+            console.log("Returning on second filter!");
             return screenArray;
         }
+
+        this.additionFilter(screenArray);
+        this.subtractionFilter(screenArray);
 
         return screenArray;
     }
@@ -138,6 +145,38 @@ class calculator {
                 let input1 = parseInt(screenArray[i - 1]);
                 let input2 = parseInt(screenArray[i + 1]);
                 let result = this.divide(input1, input2);
+                screenArray.splice((i - 1), 3, result);
+                i = 0;
+            } else {
+                i++;
+            }
+        }
+        console.log(screenArray);
+        return screenArray;
+    }
+
+    additionFilter(screenArray) {
+        for (let i = 0; i < screenArray.length; i+=0) {
+            if (screenArray[i] === this.OPERATORS[2]) {
+                let input1 = parseInt(screenArray[i - 1]);
+                let input2 = parseInt(screenArray[i + 1]);
+                let result = this.add(input1, input2);
+                screenArray.splice((i - 1), 3, result);
+                i = 0;
+            } else {
+                i++;
+            }
+        }
+        console.log(screenArray);
+        return screenArray;
+    }
+
+    subtractionFilter(screenArray) {
+        for (let i = 0; i < screenArray.length; i+=0) {
+            if (screenArray[i] === this.OPERATORS[3]) {
+                let input1 = parseInt(screenArray[i - 1]);
+                let input2 = parseInt(screenArray[i + 1]);
+                let result = this.subtract(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
             } else {
@@ -187,11 +226,11 @@ class calculator {
     }
 
     add(input1, input2) {
-
+        return input1 + input2;
     }
 
     subtract(input1, input2) {
-
+        return input1 - input2;
     }
 
     multiply(input1, input2) {
