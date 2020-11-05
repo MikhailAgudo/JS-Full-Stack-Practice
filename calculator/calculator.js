@@ -77,22 +77,45 @@ class calculator {
         let screenArray = [];
 
         let i = 0;
-        for (let j = 0; j < string.length; j++) {
-            if (j !== (string.length - 1)) {
-                for (let k = 0; k < this.OPERATORS.length; k++) {
-                    if (string[j] === this.OPERATORS[k]) {
-                        screenArray = this.sliceScreen(string, 
-                            screenArray, i, j, false);
-                        i = j + 1;
-                    }
-                }
+        for (let j = 0; j < string.length; j+=0) {
+            let checkedChar = this.checkOperators(string[j]);
+            if (j === (string.length - 1)) {
+                screenArray = this.sliceScreen(string, 
+                    screenArray, i, string.length, false);
+                j++;
+            } else if (checkedChar === false) {
+                j++;
             } else {
-                screenArray = this.sliceScreen(string, screenArray,
-                    i, string.length, true);
+                screenArray = this.sliceScreen(string, 
+                    screenArray, i, j, false);
+                j++;
+                i = j;
+            }
+            console.log(screenArray);
+        }
+        //for (let j = 0; j < string.length; j++) {
+            //if (j !== (string.length - 1)) {
+        //    if (this.checkOperators(string[j]) === true) {
+        //        screenArray = this.sliceScreen(string, 
+        //            screenArray, i, j, false);
+        //        i = j + 1;
+        //    } else if ()
+
+            //} else {
+            //    screenArray = this.sliceScreen(string, screenArray,
+            //        i, string.length, true);
+            //}
+        //}
+        return screenArray;
+    }
+
+    checkOperators(char) {
+        for (let i = 0; i < this.OPERATORS.length; i++) {
+            if (char === this.OPERATORS[i]) {
+                return true;
             }
         }
-        console.log(screenArray);
-        return screenArray;
+        return false;
     }
 
     secondFilter(screenArray) {
@@ -156,6 +179,12 @@ class calculator {
         // determineSteps().
 
         let filterInput = string.slice(i, j);
+
+        //if (this.checkOperators(filterInput[filterInput - 1]) === true) {
+
+        //}
+        console.log(filterInput);
+
         firstFilter.push(filterInput);
 
         if (isEnd === false) {
@@ -258,6 +287,20 @@ function unitTest(calc) {
         console.log("Fourth test: Pass");
     } else {
         console.log(`Fourth test: Fail, answer: ${99+2*5/5*0}`);
+    }
+
+    if (calc.calculate("6+-2") === calc.ERROR_SYNTAX) {
+        // Test double operator error.
+        console.log("Fifth test: Pass");
+    } else {
+        console.log(`Fifth test: Fail, answer: ${calc.ERROR_SYNTAX}`);
+    }
+
+    if (calc.calculate("6+2*") === calc.ERROR_SYNTAX) {
+        // Test no operand error.
+        console.log("Sixth test: Pass");
+    } else {
+        console.log(`Sixth test: Fail, answer: ${calc.ERROR_SYNTAX}`);
     }
 }
 
