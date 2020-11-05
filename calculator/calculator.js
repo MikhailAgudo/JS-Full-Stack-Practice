@@ -246,4 +246,35 @@ class calculator {
     }
 }
 
+function unitTest(calc) {
+    if (calc.calculate("6*5-3/4+2") === (6 * 5 - 3 / 4 + 2)) {
+        // Test MDAS.
+        console.log("First test: Pass");
+    } else {
+        console.log(`First test: Fail, answer: ${6 * 5 - 3 / 4 + 2 }`);
+    }
+
+    if (calc.calculate("5912 - 5491 + 9829 * 56 / 87 + 9102") === (5912 - 5491 + 9829 * 56 / 87 + 9102)) {
+        // Test big numbers.
+        console.log("Second test: Pass");
+    } else {
+        console.log(`Second test: Fail, answer: ${5912 - 5491 + 9829 * 56 / 87 + 9102}`);
+    }
+
+    if (calc.calculate("99+2*5/0") === calc.ERROR_DIVIDE_BY_ZERO) {
+        // Test zero error.
+        console.log("Third test: Pass");
+    } else {
+        console.log(`Third test: Fail, answer: ${calc.ERROR_DIVIDE_BY_ZERO}`);
+    }
+
+    if (calc.calculate("99+2*5/5*0") === calc.ERROR_DIVIDE_BY_ZERO) {
+        // Test zero error, but "disguised"
+        console.log("Fourth test: Pass");
+    } else {
+        console.log(`Fourth test: Fail, answer: ${calc.ERROR_DIVIDE_BY_ZERO}`);
+    }
+}
+
 let calc = new calculator();
+unitTest(calc);
