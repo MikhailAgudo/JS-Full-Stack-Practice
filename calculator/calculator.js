@@ -1,4 +1,5 @@
 class calculator {
+    OPERATORS = ["*", "/", "+", "-"];
     screen = document.createElement("div");
     screenText = screen.textContent;
 
@@ -42,9 +43,11 @@ class calculator {
         // Where all the calculation starts and happens.
         // First, determineSteps() then calculate everything
         // one by one.
+
+
     }
 
-    determineSteps(string) {
+    firstFilter(string) {
         // Determine what steps are needed to calculate
         // via PEMDAS/MDAS and an array containing a
         // dictionary of "operation", "input1", "input2"
@@ -55,25 +58,29 @@ class calculator {
         // an index within the same array that uses
         // the "result" variable.
 
-        let operators = ["+", "-", "*", "/"];
-        let firstFilter = [];
+        let screenArray = [];
 
         let i = 0;
         for (let j = 0; j < string.length; j++) {
             if (j !== (string.length - 1)) {
-                for (let k = 0; k < operators.length; k++) {
-                    if (string[j] === operators[k]) {
-                        firstFilter = this.sliceScreen(string, 
-                            firstFilter, i, j, false);
-                        i = j;
+                for (let k = 0; k < OPERATORS.length; k++) {
+                    if (string[j] === OPERATORS[k]) {
+                        screenArray = this.sliceScreen(string, 
+                            screenArray, i, j, false);
+                        i = j + 1;
                     }
                 }
             } else {
-                firstFilter = this.sliceScreen(string, firstFilter,
+                screenArray = this.sliceScreen(string, screenArray,
                     j, string.length, true);
             }
         }
-        console.log(firstFilter);
+        console.log(screenArray);
+        return screenArray;
+    }
+
+    secondFilter(screenArray) {
+
     }
 
     sliceScreen(string, firstFilter, i, j, isEnd) {
