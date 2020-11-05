@@ -57,14 +57,6 @@ class calculator {
 
         screenArray = this.secondFilter(screenArray);
 
-        //console.log(`Post Second: ${screenArray}`);
-
-        if (this.checkError(screenArray)) {
-            screenArray = this.checkError(screenArray);
-            this.screenText = screenArray;
-            return screenArray;
-        }
-
         this.screenText = screenArray[0];
         console.log(typeof screenArray[0]);
 
@@ -108,12 +100,6 @@ class calculator {
         // splice them. The replaced value should be the calculation
 
         this.MDFilter(screenArray);
-
-        if(this.checkError(screenArray)) {
-            console.log("Returning on second filter!");
-            return screenArray;
-        }
-
         this.ASFilter(screenArray);
 
         return screenArray;
@@ -121,10 +107,6 @@ class calculator {
 
     MDFilter(screenArray) {
         for (let i = 0; i < screenArray.length; i+=0) {
-            if (this.checkError(screenArray)) {
-                console.log("MDFilter!");
-                return screenArray;
-            }
             if (screenArray[i] === this.OPERATORS[0]) {
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
