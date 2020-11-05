@@ -91,21 +91,9 @@ class calculator {
                 j++;
                 i = j;
             }
-            console.log(screenArray);
         }
-        //for (let j = 0; j < string.length; j++) {
-            //if (j !== (string.length - 1)) {
-        //    if (this.checkOperators(string[j]) === true) {
-        //        screenArray = this.sliceScreen(string, 
-        //            screenArray, i, j, false);
-        //        i = j + 1;
-        //    } else if ()
-
-            //} else {
-            //    screenArray = this.sliceScreen(string, screenArray,
-            //        i, string.length, true);
-            //}
-        //}
+        screenArray.pop();
+        console.log(screenArray);
         return screenArray;
     }
 
@@ -129,6 +117,7 @@ class calculator {
     }
 
     MDFilter(screenArray) {
+        console.log(`MDFilter: ${screenArray}`);
         for (let i = 0; i < screenArray.length; i+=0) {
             if (screenArray[i] === this.OPERATORS[0]) {
                 let input1 = parseFloat(screenArray[i - 1]);
@@ -183,7 +172,6 @@ class calculator {
         //if (this.checkOperators(filterInput[filterInput - 1]) === true) {
 
         //}
-        console.log(filterInput);
 
         firstFilter.push(filterInput);
 
