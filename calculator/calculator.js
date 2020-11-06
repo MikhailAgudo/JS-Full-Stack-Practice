@@ -115,7 +115,7 @@ class calculator {
                     screenArray, i, string.length, true);
 
                 j++;
-            } else if (checkedChar === false) {
+            } else {
                 // Otherwise, just increment j to move on.
                 j++;
             }
@@ -183,7 +183,7 @@ class calculator {
         // We don't check if it's dividing by zero here
         // because error checking has already happened
         // after screenArray was created by firstFilter().
-        for (let i = 0; i < screenArray.length; i+=0) {
+        for (let i = 0; i < screenArray.length; i++) {
             if (screenArray[i] === this.OPERATORS[0]) {
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
@@ -200,11 +200,6 @@ class calculator {
                 screenArray.splice((i - 1), 3, result);
 
                 i = 0;
-            } else {
-                // If nothing happened, increment.
-                // Seems like useless code. Just i++
-                // the loop and remove this.
-                i++;
             }
         }
 
@@ -214,7 +209,7 @@ class calculator {
     ASFilter(screenArray) {
         // Same as MDFilter() but with addition and 
         // subtraction.
-        for (let i = 0; i < screenArray.length; i+=0) {
+        for (let i = 0; i < screenArray.length; i++) {
             if (screenArray[i] === this.OPERATORS[2]) {
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
@@ -231,8 +226,6 @@ class calculator {
                 screenArray.splice((i - 1), 3, result);
 
                 i = 0;
-            } else {
-                i++;
             }
         }
 
