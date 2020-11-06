@@ -58,7 +58,6 @@ class calculator {
         screenArray = this.secondFilter(screenArray);
 
         this.screenText = screenArray[0];
-        console.log(typeof screenArray[0]);
 
         return screenArray[0];
     }
@@ -86,14 +85,13 @@ class calculator {
                 i = j;
             } else if (j === (string.length - 1)) {
                 screenArray = this.sliceScreen(string, 
-                    screenArray, i, string.length, false);
+                    screenArray, i, string.length, true);
                 j++;
             } else if (checkedChar === false) {
                 j++;
             }
         }
         screenArray = this.removeDuds(screenArray);
-        console.log(screenArray);
         return screenArray;
     }
 
@@ -134,14 +132,12 @@ class calculator {
                 let result = this.multiply(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
-                console.log(screenArray);
             } else if (screenArray[i] === this.OPERATORS[1]) { 
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.divide(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
-                console.log(screenArray);
             } else {
                 i++;
             }
@@ -157,14 +153,12 @@ class calculator {
                 let result = this.add(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
-                console.log(screenArray);
             } else if (screenArray[i] === this.OPERATORS[3]) {
                 let input1 = parseFloat(screenArray[i - 1]);
                 let input2 = parseFloat(screenArray[i + 1]);
                 let result = this.subtract(input1, input2);
                 screenArray.splice((i - 1), 3, result);
                 i = 0;
-                console.log(screenArray);
             } else {
                 i++;
             }
@@ -177,10 +171,6 @@ class calculator {
         // determineSteps().
 
         let filterInput = string.slice(i, j);
-
-        //if (this.checkOperators(filterInput[filterInput - 1]) === true) {
-
-        //}
 
         firstFilter.push(filterInput);
 
@@ -244,7 +234,6 @@ class calculator {
         let hasDecimal = false;
         for (let i = 0; i < screenArray.length; i++) {
             let input = String(screenArray[i]);
-            console.log(`checkMultipleDecimals: ${input}`);
             for (let j = 0; j < input.length; j++) {
                 if (input[j] === "." && hasDecimal === true) {
                     return this.ERROR_SYNTAX
