@@ -194,6 +194,7 @@ class calculator {
         if (typeof screenArray != "string"){
             screenArray = this.checkDivideZero(screenArray);
             screenArray = this.checkDoubleOperator(screenArray);
+            screenArray = this.checkEndingOperator(screenArray);
         }
         
         for (let i = 0; i < this.ERRORS.length; i++) {
@@ -223,6 +224,17 @@ class calculator {
             } else {
                 isOperator = false;
             }
+        }
+        return screenArray;
+    }
+
+    checkEndingOperator(screenArray) {
+        let endIndex = screenArray.length - 1
+        if (this.checkOperators(screenArray[endIndex]) === true) {
+            return this.ERROR_SYNTAX;
+        }
+        if (this.checkOperators(screenArray[0]) === true) {
+            return this.ERROR_SYNTAX;
         }
         return screenArray;
     }
@@ -289,6 +301,13 @@ function unitTest(calc) {
         console.log("Sixth test: Pass");
     } else {
         console.log(`Sixth test: Fail, answer: ${calc.ERROR_SYNTAX}`);
+    }
+
+    if (calc.calculate("-45+78/") === calc.ERROR_SYNTAX) {
+        // Test no operand error on both sides.
+        console.log("Seventh test: Pass");
+    } else {
+        console.log(`Seventh test: Fail, answer: ${calc.ERROR_SYNTAX}`);
     }
 }
 
