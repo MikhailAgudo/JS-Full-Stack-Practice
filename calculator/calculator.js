@@ -195,6 +195,7 @@ class calculator {
             screenArray = this.checkDivideZero(screenArray);
             screenArray = this.checkDoubleOperator(screenArray);
             screenArray = this.checkEndingOperator(screenArray);
+            screenArray = this.checkMultipleDecimals(screenArray);
         }
         
         for (let i = 0; i < this.ERRORS.length; i++) {
@@ -235,6 +236,23 @@ class calculator {
         }
         if (this.checkOperators(screenArray[0]) === true) {
             return this.ERROR_SYNTAX;
+        }
+        return screenArray;
+    }
+
+    checkMultipleDecimals(screenArray) {
+        let hasDecimal = false;
+        for (let i = 0; i < screenArray.length; i++) {
+            let input = String(screenArray[i]);
+            console.log(`checkMultipleDecimals: ${input}`);
+            for (let j = 0; j < input.length; j++) {
+                if (input[j] === "." && hasDecimal === true) {
+                    return this.ERROR_SYNTAX
+                } else if (input[j] === ".") {
+                    hasDecimal = true;
+                }
+            }
+            hasDecimal = false;
         }
         return screenArray;
     }
@@ -304,6 +322,20 @@ function unitTest(calc) {
         console.log("Seventh test: Pass");
     } else {
         console.log(`Seventh test: Fail, answer: ${calc.ERROR_SYNTAX}`);
+    }
+
+    if (calc.calculate("100.1 * 34.983 + 67.12 / 5.6") === (100.1 * 34.983 + 67.12 / 5.6)) {
+        // Test operations with float numbers.
+        console.log("Eighth test: Pass");
+    } else {
+        console.log(`Eighth test: Fail, answer: ${100.1 * 34.983 + 67.12 / 5.6}`);
+    }
+
+    if (calc.calculate("10.0.1 * 34.983 + 67.12 / 5.6") === calc.ERROR_SYNTAX) {
+        // Test multiple decimal error.
+        console.log("Ninth test: Pass");
+    } else {
+        console.log(`Ninth test: Fail, answer: ${calc.ERROR_SYNTAX}`);
     }
 }
 
