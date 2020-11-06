@@ -252,11 +252,7 @@ class calculator {
     }
 
     divide(input1, input2) {
-        if (input1 === 0) {
-            return 1;
-        } else {
-            return input1 / input2;
-        }
+        return input1 / input2;
     }
 }
 
