@@ -31,34 +31,46 @@ class calculator {
             if (i < 0) {
                 let symbol = "0";
                 let color = "white";
-                let newButton = this.buildNewButton(symbol, color,
-                    this.writeToScreen(symbol));
+                let newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
                 buttonGrid.appendChild(newButton);
 
                 symbol = ".";
-                newButton = this.buildNewButton(symbol, color,
-                    this.writeToScreen(symbol));
+                newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
                 buttonGrid.appendChild(newButton);
 
-                //symbol = "=";
-                //color = "orange";
-                //newButton = this.buildNewButton(symbol, color,
-                //    this.calculate(this.screenText));
-                //buttonGrid.appendChild(newButton);
+                symbol = "=";
+                color = "orange";
+                newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.calculate(this.screenText);
+                });
+                buttonGrid.appendChild(newButton);
 
                 symbol = operatorButtons.shift();
-                newButton = this.buildNewButton(symbol, color,
-                    this.writeToScreen(symbol));
+                newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
                 buttonGrid.appendChild(newButton);
 
                 symbol = "DEL";
-                newButton = this.buildNewButton(symbol, color,
-                    this.deleteScreen());
+                newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.deleteScreen();
+                });
                 buttonGrid.appendChild(newButton);
 
                 symbol = "C";
-                newButton = this.buildNewButton(symbol, color,
-                    this.clearScreen());
+                newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.clearScreen();
+                });
                 buttonGrid.appendChild(newButton);
 
                 i = 10;
@@ -66,22 +78,28 @@ class calculator {
             } else if (i % 3 === 0) {
                 let symbol = String(i);
                 let color = "white";
-                let newButton = this.buildNewButton(symbol, color,
-                    this.writeToScreen(symbol));
+                let newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
                 buttonGrid.appendChild(newButton);
 
                 symbol = operatorButtons.shift();
                 color = "orange";
-                newButton = this.buildNewButton(symbol, color,
-                    this.writeToScreen(symbol));
+                newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
                 buttonGrid.appendChild(newButton);
 
                 i -= 5;
             } else {
                 let symbol = String(i);
                 let color = "white";
-                let newButton = this.buildNewButton(symbol, color,
-                    this.writeToScreen(symbol));
+                let newButton = this.buildNewButton(symbol, color);
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
                 buttonGrid.appendChild(newButton);
 
                 i++;
@@ -93,7 +111,7 @@ class calculator {
         body.appendChild(calcuContainer);
     }
 
-    buildNewButton(symbol, color, event) {
+    buildNewButton(symbol, color) {
         let newButton = document.createElement("button");
 
         newButton.style.border = "none";
@@ -101,10 +119,6 @@ class calculator {
         newButton.style.backgroundColor = color;
         newButton.style.textJustify = "center";
         newButton.textContent = symbol;
-
-        newButton.addEventListener("click", (e) => {
-            event();
-        });
 
         return newButton;
     }
