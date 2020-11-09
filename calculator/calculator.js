@@ -2,15 +2,38 @@ class calculator {
     OPERATORS = ["*", "/", "+", "-"];
     ERROR_DIVIDE_BY_ZERO = "ERROR: DIVIDING BY ZERO";
     ERROR_SYNTAX = "SYNTAX ERROR";
+    BORDER_RADIUS = "50px";
     ERRORS = [this.ERROR_DIVIDE_BY_ZERO, this.ERROR_SYNTAX];
     screen = document.createElement("div");
     screenText = screen.textContent;
 
     constructor() {
+        let calcuContainer = document.createElement("div");
+        calcuContainer.style.border = "none";
+        calcuContainer.style.borderRadius = BORDER_RADIUS;
+        calcuContainer.style.backgroundColor = "gray";
+        calcuContainer.style.display = "flex";
+        calcuContainer.style.flexDirection = "column";
 
+        screen.backgroundColor = "white";
+        screen.borderRadius = BORDER_RADIUS;
+
+        let buttonGrid = document.createElement("div");
+        buttonGrid.style.borderRadius = BORDER_RADIUS;
+        buttonGrid.style.display = "grid";
+        buttonGrid.style.gridTemplateRows = "auto auto auto auto";
+        buttonGrid.style.gridTemplateColumns = "auto auto auto auto";
+
+        let operatorButtons = this.OPERATORS;
+        for (let i = 7; i <= 10; i++) {
+            let symbol = String(i);
+            let color = "white";
+            let newButton = buildNewButton(color,
+                this.writeToScreen(symbol));
+        }
     }
 
-    buildNewButton(symbol, color, event) {
+    buildNewButton(color, event) {
         let newButton = document.createElement("button");
 
         newButton.style.border = "none";
