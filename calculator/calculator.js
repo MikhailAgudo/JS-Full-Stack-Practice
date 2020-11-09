@@ -62,15 +62,15 @@ class calculator {
                 i = 10;
                 break;
             } else if (i % 3 === 0) {
-                symbol = String(i);
-                color = "white";
-                newButton = this.buildNewButton(symbol, color,
+                let symbol = String(i);
+                let color = "white";
+                let newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
-                let symbol = operatorButtons.shift();
-                let color = "orange";
-                let newButton = this.buildNewButton(symbol, color,
+                symbol = operatorButtons.shift();
+                color = "orange";
+                newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
