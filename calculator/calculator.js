@@ -33,78 +33,79 @@ class calculator {
         let operatorButtons = ["*", "/", "+", "-"];
         for (let i = 7; i < 10; i+=0) {
             if (i < 0) {
-                let symbol = "0";
+                let zeroSymbol = "0";
                 let color = "white";
-                let newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
-                    this.writeToScreen(symbol);
+                let numberButton = this.buildNewButton(zeroSymbol, color);
+                numberButton.addEventListener("click", (e) => {
+                    this.writeToScreen(zeroSymbol);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(numberButton);
 
-                symbol = ".";
-                newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
-                    this.writeToScreen(symbol);
+                let decimalSymbol = ".";
+                let decimalButton = this.buildNewButton(decimalSymbol, color);
+                decimalButton.addEventListener("click", (e) => {
+                    this.writeToScreen(decimalSymbol);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(decimalButton);
 
-                symbol = "=";
+                let equalSymbol = "=";
                 color = "orange";
-                newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
+                let equalButton = this.buildNewButton(equalSymbol, color);
+                equalButton.addEventListener("click", (e) => {
                     this.calculate(this.screen.textContent);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(equalButton);
 
-                symbol = operatorButtons.shift();
-                newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
-                    this.writeToScreen(symbol);
+                let operatorSymbol = operatorButtons.shift();
+                let operatorButton = this.buildNewButton(operatorSymbol, color);
+                operatorButton.addEventListener("click", (e) => {
+                    this.writeToScreen(operatorSymbol);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(operatorButton);
 
-                symbol = "DEL";
-                newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
+                let deleteSymbol = "DEL";
+                let deleteButton = this.buildNewButton(deleteSymbol, color);
+                deleteButton.addEventListener("click", (e) => {
                     this.deleteScreen();
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(deleteButton);
 
-                symbol = "C";
-                newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
+                let clearSymbol = "C";
+                let clearButton = this.buildNewButton(clearSymbol, color);
+                clearButton.addEventListener("click", (e) => {
                     this.clearScreen();
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(clearButton);
 
                 i = 10;
                 break;
             } else if (i % 3 === 0) {
-                let symbol = String(i);
+                let numberSymbol = String(i);
                 let color = "white";
-                let newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
-                    this.writeToScreen(symbol);
+                let numberButton = this.buildNewButton(numberSymbol, color);
+                console.log(numberButton);
+                numberButton.addEventListener("click", (e) => {
+                    this.writeToScreen(numberSymbol);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(numberButton);
 
-                symbol = operatorButtons.shift();
+                let operatorSymbol = operatorButtons.shift();
                 color = "orange";
-                newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
-                    this.writeToScreen(symbol);
+                let operatorButton = this.buildNewButton(operatorSymbol, color);
+                operatorButton.addEventListener("click", (e) => {
+                    this.writeToScreen(operatorSymbol);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(operatorButton);
 
                 i -= 5;
             } else {
                 let symbol = String(i);
                 let color = "white";
-                let newButton = this.buildNewButton(symbol, color);
-                newButton.addEventListener("click", (e) => {
+                let numberButton = this.buildNewButton(symbol, color);
+                numberButton.addEventListener("click", (e) => {
                     this.writeToScreen(symbol);
                 });
-                buttonGrid.appendChild(newButton);
+                buttonGrid.appendChild(numberButton);
 
                 i++;
             }  
