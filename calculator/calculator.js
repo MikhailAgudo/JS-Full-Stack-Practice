@@ -29,33 +29,33 @@ class calculator {
             if (i < 0) {
                 let symbol = "0";
                 let color = "white";
-                let newButton = buildNewButton(symbol, color,
+                let newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
                 symbol = ".";
-                newButton = buildNewButton(symbol, color,
+                newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
                 symbol = "=";
                 color = "orange";
-                newButton = buildNewButton(symbol, color,
+                newButton = this.buildNewButton(symbol, color,
                     this.calculate(this.screenText));
                 buttonGrid.appendChild(newButton);
 
                 symbol = operatorButtons.shift();
-                newButton = buildNewButton(symbol, color,
+                newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
                 symbol = "DEL";
-                newButton = buildNewButton(symbol, color,
+                newButton = this.buildNewButton(symbol, color,
                     this.deleteScreen());
                 buttonGrid.appendChild(newButton);
 
                 symbol = "C";
-                newButton = buildNewButton(symbol, color,
+                newButton = this.buildNewButton(symbol, color,
                     this.clearScreen());
                 buttonGrid.appendChild(newButton);
 
@@ -64,13 +64,13 @@ class calculator {
             } else if (i % 3 === 0) {
                 symbol = String(i);
                 color = "white";
-                newButton = buildNewButton(symbol, color,
+                newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
                 let symbol = operatorButtons.shift();
                 let color = "orange";
-                let newButton = buildNewButton(symbol, color,
+                let newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
@@ -78,7 +78,7 @@ class calculator {
             } else {
                 let symbol = String(i);
                 let color = "white";
-                let newButton = buildNewButton(symbol, color,
+                let newButton = this.buildNewButton(symbol, color,
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
