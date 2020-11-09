@@ -2,7 +2,7 @@ class calculator {
     OPERATORS = ["*", "/", "+", "-"];
     ERROR_DIVIDE_BY_ZERO = "ERROR: DIVIDING BY ZERO";
     ERROR_SYNTAX = "SYNTAX ERROR";
-    BORDER_RADIUS = "50px";
+    BORDER_RADIUS = "5px";
     ERRORS = [this.ERROR_DIVIDE_BY_ZERO, this.ERROR_SYNTAX];
     screen = document.createElement("div");
     screenText = screen.textContent;
@@ -26,7 +26,7 @@ class calculator {
         buttonGrid.style.gridTemplateRows = " auto auto auto auto auto";
         buttonGrid.style.gridTemplateColumns = "auto auto auto auto";
 
-        let operatorButtons = this.OPERATORS;
+        let operatorButtons = ["*", "/", "+", "-"];
         for (let i = 7; i < 10; i+=0) {
             if (i < 0) {
                 let symbol = "0";
@@ -40,11 +40,11 @@ class calculator {
                     this.writeToScreen(symbol));
                 buttonGrid.appendChild(newButton);
 
-                symbol = "=";
-                color = "orange";
-                newButton = this.buildNewButton(symbol, color,
-                    this.calculate(this.screenText));
-                buttonGrid.appendChild(newButton);
+                //symbol = "=";
+                //color = "orange";
+                //newButton = this.buildNewButton(symbol, color,
+                //    this.calculate(this.screenText));
+                //buttonGrid.appendChild(newButton);
 
                 symbol = operatorButtons.shift();
                 newButton = this.buildNewButton(symbol, color,
