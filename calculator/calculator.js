@@ -144,13 +144,6 @@ class calculator {
         this.screen.textContent = string.slice(0, (string.length - 1));
     }
 
-    updateScreen() {
-        // Method to update the screen, goes along with
-        // other methods in a button's event listener.
-        // Probably useless because screenText directly
-        // writes to textContent.
-    }
-
     calculate(string) {
         // Where all the calculation starts and happens.
         // firstFilter() turns the input string into
@@ -172,7 +165,7 @@ class calculator {
 
         screenArray = this.secondFilter(screenArray);
 
-        // Then, modify screenText to contain the answer.
+        // Then, modify screen.textContent to contain the answer.
         // Return it, for unit test purposes.
         this.screen.textContent = screenArray[0];
 
@@ -556,4 +549,3 @@ function unitTest(calc) {
 }
 
 let calc = new calculator();
-unitTest(calc);
