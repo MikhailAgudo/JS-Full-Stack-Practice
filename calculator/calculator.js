@@ -7,10 +7,12 @@ class calculator {
     SET_COLOR = ["rgb(49, 49, 49)", "rgb(62, 62, 62)",
         "rgb(72, 72, 72)", "rgb(13, 118, 49)",
         "rgb(122, 122, 122)", "rgb(63, 168, 99)"];
+    BACKGROUND_COLOR = "rgb(44, 44, 44)";
     screen;
 
     constructor() {
         let body = document.querySelector("body");
+        body.style.backgroundColor = this.BACKGROUND_COLOR;
 
         this.screen = document.createElement("div");
         this.screen.style.backgroundColor = this.SET_COLOR[0];
@@ -40,46 +42,28 @@ class calculator {
             if (i < 0) {
                 let zeroSymbol = "0";
                 let color = this.SET_COLOR[2];
-                let numberButton = this.buildNewButton(zeroSymbol, color);
-                numberButton.addEventListener("click", (e) => {
-                    this.writeToScreen(zeroSymbol);
-                });
+                let numberButton = this.buildNewButton(zeroSymbol, color, "write");
                 buttonGrid.appendChild(numberButton);
 
                 let decimalSymbol = ".";
-                let decimalButton = this.buildNewButton(decimalSymbol, color);
-                decimalButton.addEventListener("click", (e) => {
-                    this.writeToScreen(decimalSymbol);
-                });
+                let decimalButton = this.buildNewButton(decimalSymbol, color, "write");
                 buttonGrid.appendChild(decimalButton);
 
                 let equalSymbol = "=";
                 color = this.SET_COLOR[3];
-                let equalButton = this.buildNewButton(equalSymbol, color);
-                equalButton.addEventListener("click", (e) => {
-                    this.calculate(this.screen.textContent);
-                });
+                let equalButton = this.buildNewButton(equalSymbol, color, "calculate");
                 buttonGrid.appendChild(equalButton);
 
                 let operatorSymbol = operatorButtons.shift();
-                let operatorButton = this.buildNewButton(operatorSymbol, color);
-                operatorButton.addEventListener("click", (e) => {
-                    this.writeToScreen(operatorSymbol);
-                });
+                let operatorButton = this.buildNewButton(operatorSymbol, color, "write");
                 buttonGrid.appendChild(operatorButton);
 
                 let deleteSymbol = "D";
-                let deleteButton = this.buildNewButton(deleteSymbol, color);
-                deleteButton.addEventListener("click", (e) => {
-                    this.deleteScreen();
-                });
+                let deleteButton = this.buildNewButton(deleteSymbol, color, "delete");
                 buttonGrid.appendChild(deleteButton);
 
                 let clearSymbol = "C";
-                let clearButton = this.buildNewButton(clearSymbol, color);
-                clearButton.addEventListener("click", (e) => {
-                    this.clearScreen();
-                });
+                let clearButton = this.buildNewButton(clearSymbol, color, "clear");
                 buttonGrid.appendChild(clearButton);
 
                 i = 10;
@@ -87,29 +71,19 @@ class calculator {
             } else if (i % 3 === 0) {
                 let numberSymbol = String(i);
                 let color = this.SET_COLOR[2];
-                let numberButton = this.buildNewButton(numberSymbol, color);
-                console.log(numberButton);
-                numberButton.addEventListener("click", (e) => {
-                    this.writeToScreen(numberSymbol);
-                });
+                let numberButton = this.buildNewButton(numberSymbol, color, "write");
                 buttonGrid.appendChild(numberButton);
 
                 let operatorSymbol = operatorButtons.shift();
                 color = this.SET_COLOR[3];
-                let operatorButton = this.buildNewButton(operatorSymbol, color);
-                operatorButton.addEventListener("click", (e) => {
-                    this.writeToScreen(operatorSymbol);
-                });
+                let operatorButton = this.buildNewButton(operatorSymbol, color, "write");
                 buttonGrid.appendChild(operatorButton);
 
                 i -= 5;
             } else {
                 let symbol = String(i);
                 let color = this.SET_COLOR[2];
-                let numberButton = this.buildNewButton(symbol, color);
-                numberButton.addEventListener("click", (e) => {
-                    this.writeToScreen(symbol);
-                });
+                let numberButton = this.buildNewButton(symbol, color, "write");
                 buttonGrid.appendChild(numberButton);
 
                 i++;
@@ -121,7 +95,7 @@ class calculator {
         body.appendChild(calcuContainer);
     }
 
-    buildNewButton(symbol, color) {
+    buildNewButton(symbol, color, type) {
         let newButton = document.createElement("button");
 
         newButton.style.border = `1px solid ${this.SET_COLOR[0]}`;
@@ -138,6 +112,50 @@ class calculator {
         newButton.addEventListener("mouseout", (e) => {
             this.changeButtonColor(newButton);
         });
+
+        switch(type) {
+            case "write":
+                newButton.addEventListener("click", (e) => {
+                    this.writeToScreen(symbol);
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === symbol) {
+                        this.writeToScreen(symbol);
+                    }
+                });
+                break;
+            case "clear":
+                newButton.addEventListener("click", (e) => {
+                    this.clearScreen();
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "c") {
+                        this.clearScreen();
+                    }
+                });
+                break;
+            case "delete":
+                newButton.addEventListener("click", (e) => {
+                    this.deleteScreen();
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Backspace") {
+                        this.deleteScreen();
+                    }
+                });
+                break;
+            case "calculate":
+                newButton.addEventListener("click", (e) => {
+                    this.calculate(this.screen.textContent);
+                });
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === symbol || e.key === "Enter") {
+                        this.calculate(this.screen.textContent);
+                    }
+                });
+                break;
+
+        }
 
         return newButton;
     }
