@@ -4,25 +4,29 @@ class calculator {
     ERROR_SYNTAX = "SYNTAX ERROR";
     BORDER_RADIUS = "5px";
     ERRORS = [this.ERROR_DIVIDE_BY_ZERO, this.ERROR_SYNTAX];
-    screen = document.createElement("div");
-    screenText = screen.textContent;
+    screen;
 
     constructor() {
         let body = document.querySelector("body");
 
+        this.screen = document.createElement("div");
+        this.screen.style.backgroundColor = "white";
+        this.screen.style.height = "100px";
+        this.screen.style.borderRadius = this.BORDER_RADIUS;
+
         let calcuContainer = document.createElement("div");
         calcuContainer.style.border = "none";
         calcuContainer.style.borderRadius = this.BORDER_RADIUS;
+        calcuContainer.style.padding = "2em";
+        calcuContainer.style.width = "300px";
         calcuContainer.style.backgroundColor = "gray";
         calcuContainer.style.display = "flex";
         calcuContainer.style.flexDirection = "column";
 
-        screen.backgroundColor = "white";
-        screen.borderRadius = this.BORDER_RADIUS;
-
         let buttonGrid = document.createElement("div");
         buttonGrid.style.borderRadius = this.BORDER_RADIUS;
         buttonGrid.style.display = "grid";
+        buttonGrid.style.gridGap = "2px";
         buttonGrid.style.gridTemplateRows = " auto auto auto auto auto";
         buttonGrid.style.gridTemplateColumns = "auto auto auto auto";
 
@@ -48,7 +52,7 @@ class calculator {
                 color = "orange";
                 newButton = this.buildNewButton(symbol, color);
                 newButton.addEventListener("click", (e) => {
-                    this.calculate(this.screenText);
+                    this.calculate(this.screen.textContent);
                 });
                 buttonGrid.appendChild(newButton);
 
@@ -128,16 +132,16 @@ class calculator {
     }
 
     writeToScreen(string) {
-        this.screenText += string;
+        this.screen.textContent += string;
     }
 
     clearScreen() {
-        this.screenText = "";
+        this.screen.textContent = "";
     }
 
     deleteScreen() {
-        let string = this.screenText;
-        this.screenText = string.slice(0, (string.length - 1));
+        let string = this.screen.textContent;
+        this.screen.textContent = string.slice(0, (string.length - 1));
     }
 
     updateScreen() {
@@ -162,7 +166,7 @@ class calculator {
         // if there's an actual error.
         if (this.checkError(screenArray)) {
             screenArray = this.checkError(screenArray);
-            this.screenText = screenArray;
+            this.screen.textContent = screenArray;
             return screenArray;
         }
 
@@ -170,7 +174,7 @@ class calculator {
 
         // Then, modify screenText to contain the answer.
         // Return it, for unit test purposes.
-        this.screenText = screenArray[0];
+        this.screen.textContent = screenArray[0];
 
         return screenArray[0];
     }
