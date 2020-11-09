@@ -128,10 +128,16 @@ class calculator {
         newButton.style.borderRadius = this.BORDER_RADIUS;
         newButton.style.backgroundColor = color;
         newButton.style.color = "white";
+        newButton.style.outline = "none";
         newButton.style.textJustify = "center";
         newButton.textContent = symbol;
 
-        
+        newButton.addEventListener("mouseover", (e) => {
+            this.changeButtonColor(newButton);
+        });
+        newButton.addEventListener("mouseout", (e) => {
+            this.changeButtonColor(newButton);
+        });
 
         return newButton;
     }
