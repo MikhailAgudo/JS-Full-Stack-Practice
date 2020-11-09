@@ -10,34 +10,95 @@ class calculator {
     constructor() {
         let calcuContainer = document.createElement("div");
         calcuContainer.style.border = "none";
-        calcuContainer.style.borderRadius = BORDER_RADIUS;
+        calcuContainer.style.borderRadius = this.BORDER_RADIUS;
         calcuContainer.style.backgroundColor = "gray";
         calcuContainer.style.display = "flex";
         calcuContainer.style.flexDirection = "column";
 
         screen.backgroundColor = "white";
-        screen.borderRadius = BORDER_RADIUS;
+        screen.borderRadius = this.BORDER_RADIUS;
 
         let buttonGrid = document.createElement("div");
-        buttonGrid.style.borderRadius = BORDER_RADIUS;
+        buttonGrid.style.borderRadius = this.BORDER_RADIUS;
         buttonGrid.style.display = "grid";
-        buttonGrid.style.gridTemplateRows = "auto auto auto auto";
+        buttonGrid.style.gridTemplateRows = " auto auto auto auto auto";
         buttonGrid.style.gridTemplateColumns = "auto auto auto auto";
 
         let operatorButtons = this.OPERATORS;
-        for (let i = 7; i <= 10; i++) {
-            let symbol = String(i);
-            let color = "white";
-            let newButton = buildNewButton(color,
-                this.writeToScreen(symbol));
+        for (let i = 7; i < 10; i+=0) {
+            if (i < 0) {
+                let symbol = "0";
+                let color = "white";
+                let newButton = buildNewButton(symbol, color,
+                    this.writeToScreen(symbol));
+                buttonGrid.appendChild(newButton);
+
+                symbol = ".";
+                newButton = buildNewButton(symbol, color,
+                    this.writeToScreen(symbol));
+                buttonGrid.appendChild(newButton);
+
+                symbol = "=";
+                color = "orange";
+                newButton = buildNewButton(symbol, color,
+                    this.calculate(this.screenText));
+                buttonGrid.appendChild(newButton);
+
+                symbol = operatorButtons.shift();
+                newButton = buildNewButton(symbol, color,
+                    this.writeToScreen(symbol));
+                buttonGrid.appendChild(newButton);
+
+                symbol = "DEL";
+                newButton = buildNewButton(symbol, color,
+                    this.deleteScreen());
+                buttonGrid.appendChild(newButton);
+
+                symbol = "C";
+                newButton = buildNewButton(symbol, color,
+                    this.clearScreen());
+                buttonGrid.appendChild(newButton);
+
+                i = 10;
+                break;
+            } else if (i % 3 === 0) {
+                symbol = String(i);
+                color = "white";
+                newButton = buildNewButton(symbol, color,
+                    this.writeToScreen(symbol));
+                buttonGrid.appendChild(newButton);
+
+                let symbol = operatorButtons.shift();
+                let color = "orange";
+                let newButton = buildNewButton(symbol, color,
+                    this.writeToScreen(symbol));
+                buttonGrid.appendChild(newButton);
+
+                i -= 5;
+            } else {
+                let symbol = String(i);
+                let color = "white";
+                let newButton = buildNewButton(symbol, color,
+                    this.writeToScreen(symbol));
+                buttonGrid.appendChild(newButton);
+
+                i++;
+            }  
         }
+
+        calcuContainer.appendChild(this.screen);
+        calcuContainer.appendChild(buttonGrid);
+        document.appendChild(calcuContainer);
     }
 
-    buildNewButton(color, event) {
+    buildNewButton(symbol, color, event) {
         let newButton = document.createElement("button");
 
         newButton.style.border = "none";
+        newButton.style.borderRadius = this.BORDER_RADIUS;
         newButton.style.backgroundColor = color;
+        newButton.style.textJustify = "center";
+        newButton.textContent = symbol;
 
         newButton.addEventListener("click", (e) => {
             event();
@@ -56,6 +117,11 @@ class calculator {
 
     clearScreen() {
         this.screenText = "";
+    }
+
+    deleteScreen() {
+        let string = this.screenText;
+        this.screenText = string.slice(0, (string.length - 1));
     }
 
     updateScreen() {
