@@ -4,22 +4,27 @@ class calculator {
     ERROR_SYNTAX = "SYNTAX ERROR";
     BORDER_RADIUS = "5px";
     ERRORS = [this.ERROR_DIVIDE_BY_ZERO, this.ERROR_SYNTAX];
+    SET_COLOR = ["rgb(49, 49, 49)", "rgb(62, 62, 62)",
+        "rgb(72, 72, 72)", "rgb(13, 118, 49)",
+        "rgb(122, 122, 122)", "rgb(63, 168, 99)"];
     screen;
 
     constructor() {
         let body = document.querySelector("body");
 
         this.screen = document.createElement("div");
-        this.screen.style.backgroundColor = "white";
-        this.screen.style.height = "100px";
+        this.screen.style.backgroundColor = this.SET_COLOR[0];
+        this.screen.style.color = "white";
+        this.screen.style.height = "2em";
+        this.screen.style.margin = "0 0 1em 0";
         this.screen.style.borderRadius = this.BORDER_RADIUS;
 
         let calcuContainer = document.createElement("div");
         calcuContainer.style.border = "none";
         calcuContainer.style.borderRadius = this.BORDER_RADIUS;
-        calcuContainer.style.padding = "2em";
-        calcuContainer.style.width = "300px";
-        calcuContainer.style.backgroundColor = "gray";
+        calcuContainer.style.padding = "1em";
+        calcuContainer.style.width = "15em";
+        calcuContainer.style.backgroundColor = this.SET_COLOR[1];
         calcuContainer.style.display = "flex";
         calcuContainer.style.flexDirection = "column";
 
@@ -34,7 +39,7 @@ class calculator {
         for (let i = 7; i < 10; i+=0) {
             if (i < 0) {
                 let zeroSymbol = "0";
-                let color = "white";
+                let color = this.SET_COLOR[2];
                 let numberButton = this.buildNewButton(zeroSymbol, color);
                 numberButton.addEventListener("click", (e) => {
                     this.writeToScreen(zeroSymbol);
@@ -49,7 +54,7 @@ class calculator {
                 buttonGrid.appendChild(decimalButton);
 
                 let equalSymbol = "=";
-                color = "orange";
+                color = this.SET_COLOR[3];
                 let equalButton = this.buildNewButton(equalSymbol, color);
                 equalButton.addEventListener("click", (e) => {
                     this.calculate(this.screen.textContent);
@@ -63,7 +68,7 @@ class calculator {
                 });
                 buttonGrid.appendChild(operatorButton);
 
-                let deleteSymbol = "DEL";
+                let deleteSymbol = "D";
                 let deleteButton = this.buildNewButton(deleteSymbol, color);
                 deleteButton.addEventListener("click", (e) => {
                     this.deleteScreen();
@@ -81,7 +86,7 @@ class calculator {
                 break;
             } else if (i % 3 === 0) {
                 let numberSymbol = String(i);
-                let color = "white";
+                let color = this.SET_COLOR[2];
                 let numberButton = this.buildNewButton(numberSymbol, color);
                 console.log(numberButton);
                 numberButton.addEventListener("click", (e) => {
@@ -90,7 +95,7 @@ class calculator {
                 buttonGrid.appendChild(numberButton);
 
                 let operatorSymbol = operatorButtons.shift();
-                color = "orange";
+                color = this.SET_COLOR[3];
                 let operatorButton = this.buildNewButton(operatorSymbol, color);
                 operatorButton.addEventListener("click", (e) => {
                     this.writeToScreen(operatorSymbol);
@@ -100,7 +105,7 @@ class calculator {
                 i -= 5;
             } else {
                 let symbol = String(i);
-                let color = "white";
+                let color = this.SET_COLOR[2];
                 let numberButton = this.buildNewButton(symbol, color);
                 numberButton.addEventListener("click", (e) => {
                     this.writeToScreen(symbol);
@@ -119,13 +124,29 @@ class calculator {
     buildNewButton(symbol, color) {
         let newButton = document.createElement("button");
 
-        newButton.style.border = "none";
+        newButton.style.border = `1px solid ${this.SET_COLOR[0]}`;
         newButton.style.borderRadius = this.BORDER_RADIUS;
         newButton.style.backgroundColor = color;
+        newButton.style.color = "white";
         newButton.style.textJustify = "center";
         newButton.textContent = symbol;
 
+        
+
         return newButton;
+    }
+
+    changeButtonColor(newButton) {
+        let buttonColor = newButton.style.backgroundColor;
+        if (buttonColor === this.SET_COLOR[2]) {
+            newButton.style.backgroundColor = this.SET_COLOR[4];
+        } else if (buttonColor === this.SET_COLOR[3]) {
+            newButton.style.backgroundColor = this.SET_COLOR[5];
+        } else if (buttonColor === this.SET_COLOR[4]) {
+            newButton.style.backgroundColor = this.SET_COLOR[2];
+        } else if (buttonColor === this.SET_COLOR[5]) {
+            newButton.style.backgroundColor = this.SET_COLOR[3];
+        }
     }
 
     initializeScreen() {
@@ -133,6 +154,10 @@ class calculator {
     }
 
     writeToScreen(string) {
+        if (this.checkError(this.screen.textContent)) {
+            this.clearScreen();
+        }
+
         this.screen.textContent += string;
     }
 
@@ -141,6 +166,10 @@ class calculator {
     }
 
     deleteScreen() {
+        if (this.checkError(this.screen.textContent)) {
+            this.clearScreen();
+        }
+
         let string = this.screen.textContent;
         this.screen.textContent = string.slice(0, (string.length - 1));
     }
