@@ -120,7 +120,13 @@ class calculator {
                 });
                 document.addEventListener("keydown", (e) => {
                     if (e.key === symbol) {
+                        this.changeButtonColor(newButton);
                         this.writeToScreen(symbol);
+                    }
+                });
+                document.addEventListener("keyup", (e) => {
+                    if (e.key === symbol) {
+                        this.changeButtonColor(newButton);
                     }
                 });
                 break;
@@ -130,7 +136,13 @@ class calculator {
                 });
                 document.addEventListener("keydown", (e) => {
                     if (e.key === "c") {
+                        this.changeButtonColor(newButton);
                         this.clearScreen();
+                    }
+                });
+                document.addEventListener("keyup", (e) => {
+                    if (e.key === "c") {
+                        this.changeButtonColor(newButton);
                     }
                 });
                 break;
@@ -140,7 +152,13 @@ class calculator {
                 });
                 document.addEventListener("keydown", (e) => {
                     if (e.key === "Backspace") {
+                        this.changeButtonColor(newButton);
                         this.deleteScreen();
+                    }
+                });
+                document.addEventListener("keyup", (e) => {
+                    if (e.key === "Backspace") {
+                        this.changeButtonColor(newButton);
                     }
                 });
                 break;
@@ -150,7 +168,13 @@ class calculator {
                 });
                 document.addEventListener("keydown", (e) => {
                     if (e.key === symbol || e.key === "Enter") {
+                        this.changeButtonColor(newButton);
                         this.calculate(this.screen.textContent);
+                    }
+                });
+                document.addEventListener("keyup", (e) => {
+                    if (e.key === symbol || e.key === "Enter") {
+                        this.changeButtonColor(newButton);
                     }
                 });
                 break;
