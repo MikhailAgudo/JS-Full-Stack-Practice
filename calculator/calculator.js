@@ -8,6 +8,8 @@ class calculator {
     screenText = screen.textContent;
 
     constructor() {
+        let body = document.querySelector("body");
+
         let calcuContainer = document.createElement("div");
         calcuContainer.style.border = "none";
         calcuContainer.style.borderRadius = this.BORDER_RADIUS;
@@ -88,7 +90,7 @@ class calculator {
 
         calcuContainer.appendChild(this.screen);
         calcuContainer.appendChild(buttonGrid);
-        document.appendChild(calcuContainer);
+        body.appendChild(calcuContainer);
     }
 
     buildNewButton(symbol, color, event) {
