@@ -1,45 +1,85 @@
 class calculator {
+    // Initialize these variables that will be used
+    // by many functions later on.
+
+    // $OPERATORS is used by many of the calculation-
+    // related functions. Putting them all in one array
+    // makes them easy to access. They are also arranged
+    // in MDAS.
     OPERATORS = ["*", "/", "+", "-"];
+
+    // These errors are important for setting the screen's
+    // textContent into these values. We'll want the $ERRORS
+    // array because checkErrors() loops over this.
     ERROR_DIVIDE_BY_ZERO = "ERROR: DIVIDING BY ZERO";
     ERROR_SYNTAX = "SYNTAX ERROR";
-    BORDER_RADIUS = "5px";
     ERRORS = [this.ERROR_DIVIDE_BY_ZERO, this.ERROR_SYNTAX];
+
+    // Styles consistently used over much of the UI.
+    BORDER_RADIUS = "5px";
     SET_COLOR = ["rgb(49, 49, 49)", "rgb(62, 62, 62)",
         "rgb(72, 72, 72)", "rgb(13, 118, 49)",
         "rgb(122, 122, 122)", "rgb(63, 168, 99)"];
     BACKGROUND_COLOR = "rgb(44, 44, 44)";
+
+    // $screen is accessed by the UI functions and
+    // the calculation functions. This is the element
+    // used to display the numbers and such.
+    // It's declared as a property, because otherwise
+    // it will be inaccessible.
     screen;
 
     constructor() {
+        // Declare $body so that we can append nodes
+        // into it. 
         let body = document.querySelector("body");
         body.style.backgroundColor = this.BACKGROUND_COLOR;
 
+        // Initialize the $screen property to make it look
+        // decent in the UI.
         this.screen = document.createElement("div");
         this.screen.style.backgroundColor = this.SET_COLOR[0];
+        this.screen.style.borderRadius = this.BORDER_RADIUS;
         this.screen.style.color = "white";
         this.screen.style.height = "2em";
         this.screen.style.margin = "0 0 1em 0";
-        this.screen.style.borderRadius = this.BORDER_RADIUS;
 
+        // $calcuContainer is the entire calculator that
+        // will contain the screen and the buttons,
+        // which is why we need it with a flex display.
         let calcuContainer = document.createElement("div");
+        calcuContainer.style.backgroundColor = this.SET_COLOR[1];
         calcuContainer.style.border = "none";
         calcuContainer.style.borderRadius = this.BORDER_RADIUS;
-        calcuContainer.style.padding = "1em";
-        calcuContainer.style.width = "15em";
-        calcuContainer.style.backgroundColor = this.SET_COLOR[1];
         calcuContainer.style.display = "flex";
         calcuContainer.style.flexDirection = "column";
+        calcuContainer.style.padding = "1em";
+        calcuContainer.style.width = "15em";
 
+        // $buttonGrid will get all of the buttons.
         let buttonGrid = document.createElement("div");
         buttonGrid.style.borderRadius = this.BORDER_RADIUS;
         buttonGrid.style.display = "grid";
         buttonGrid.style.gridGap = "2px";
-        buttonGrid.style.gridTemplateRows = " auto auto auto auto auto";
         buttonGrid.style.gridTemplateColumns = "auto auto auto auto";
+        buttonGrid.style.gridTemplateRows = " auto auto auto auto auto";
 
+        // $operatorButtons is needed when we append
+        // the operators inside the for loop. This is
+        // we don't have to make a counter variable
+        // simply by shift().
         let operatorButtons = ["*", "/", "+", "-"];
+
+        // The for loop will automatically append buttons
+        // in some form. 
         for (let i = 7; i < 10; i+=0) {
             if (i < 0) {
+                // This portion will happen when $i reaches
+                // less than 0 later, decremented when
+                // $i is divisible by 3. By this point
+                // the buttons will be in their 4th row
+                // and everything else will be appended.
+
                 let zeroSymbol = "0";
                 let color = this.SET_COLOR[2];
                 let numberButton = this.buildNewButton(zeroSymbol, color, "write");
@@ -69,6 +109,14 @@ class calculator {
                 i = 10;
                 break;
             } else if (i % 3 === 0) {
+                // When $i is divisible by 3, we first
+                // append the number button and then
+                // the operator, which fully fills out the
+                // entire row. Then we decrement by 5
+                // because calculators are arranged in:
+                // (7-8-9/4-5-6/1-2-3), so 9 goes to 4 and
+                // 6 goes to 1. It will eventually reach
+                // a negative number.
                 let numberSymbol = String(i);
                 let color = this.SET_COLOR[2];
                 let numberButton = this.buildNewButton(numberSymbol, color, "write");
@@ -81,6 +129,8 @@ class calculator {
 
                 i -= 5;
             } else {
+                // Otherwise, just append the number buttons
+                // and advance $i.
                 let symbol = String(i);
                 let color = this.SET_COLOR[2];
                 let numberButton = this.buildNewButton(symbol, color, "write");
@@ -90,22 +140,34 @@ class calculator {
             }  
         }
 
+        // Then, append $screen to $calcuContainer
+        // followed by $buttonGrid because we want
+        // $screen to appear first in the column-based
+        // flex display. Append $calcuContainer to $body
+        // so it displays in the page.
         calcuContainer.appendChild(this.screen);
         calcuContainer.appendChild(buttonGrid);
         body.appendChild(calcuContainer);
     }
 
     buildNewButton(symbol, color, type) {
+        // This function accepts a symbol and color
+        // for the appearance of the UI; then type.
+        // $type is a string that will be used in a
+        // switch statement and will decide how the button
+        // works; the event listeners & its functions.
         let newButton = document.createElement("button");
 
+        newButton.style.backgroundColor = color;
         newButton.style.border = `1px solid ${this.SET_COLOR[0]}`;
         newButton.style.borderRadius = this.BORDER_RADIUS;
-        newButton.style.backgroundColor = color;
         newButton.style.color = "white";
         newButton.style.outline = "none";
         newButton.style.textJustify = "center";
         newButton.textContent = symbol;
 
+        // These event listeners make the buttons glow
+        // when the mouse hovers over them.
         newButton.addEventListener("mouseover", (e) => {
             this.changeButtonColor(newButton);
         });
@@ -114,6 +176,19 @@ class calculator {
         });
 
         switch(type) {
+            // $type decides the function based on the string.
+            // This needs to be done if we want to dynamically
+            // generate the buttons without manually writing
+            // every event listeners in the constructor. All of
+            // the needed information is already covered by $symbol;
+            // the textContent, the symbol that needs to be written,
+            // and the key that needs to be pressed on the keyboard.
+
+            // The click event adds the relative function that it needs.
+            // Add keydown and keyup event on $document because
+            // otherwise we'll have to focus on to a specific button
+            // via clicking before the functions happen. They also
+            // make the buttons glow.
             case "write":
                 newButton.addEventListener("click", (e) => {
                     this.writeToScreen(symbol);
@@ -185,6 +260,11 @@ class calculator {
     }
 
     changeButtonColor(newButton) {
+        // This function exists to simply change the color
+        // of whatever button is input. Because
+        // the color theme has already been decided,
+        // we can easily compare the colors like this.
+
         let buttonColor = newButton.style.backgroundColor;
         if (buttonColor === this.SET_COLOR[2]) {
             newButton.style.backgroundColor = this.SET_COLOR[4];
@@ -197,27 +277,37 @@ class calculator {
         }
     }
 
-    initializeScreen() {
-
-    }
-
     writeToScreen(string) {
+        // If the $textContent is one of the errors,
+        // call the clearScreen() function. This makes
+        // the screen clear by itself when you want
+        // to write something on it.
         if (this.checkError(this.screen.textContent)) {
             this.clearScreen();
         }
 
+        // Then add the string.
         this.screen.textContent += string;
     }
 
     clearScreen() {
+        // Clear $textContent to help calculate().
+        // We want to set $textContent into "" because
+        // we'll be adding string. Making it 'null' or
+        // undefined will only make things less
+        // convenient.
         this.screen.textContent = "";
     }
 
     deleteScreen() {
+        // Similar code to writeToScreen().
         if (this.checkError(this.screen.textContent)) {
             this.clearScreen();
         }
 
+        // Since we can't pop() strings, we have to splice it
+        // right up until the last character to simulate
+        // a "backspace".
         let string = this.screen.textContent;
         this.screen.textContent = string.slice(0, (string.length - 1));
     }
@@ -306,6 +396,24 @@ class calculator {
         // with double operators. It prevents any
         // unnecessary NaN from happening.
         screenArray = this.removeDuds(screenArray);
+
+        return screenArray;
+    }
+
+    sliceScreen(string, screenArray, i, j, isEnd) {
+        // Slices the string and appends it to
+        // screenArray.
+
+        // filterInput is the slice from i to j, which
+        // is usually the number.
+        let filterInput = string.slice(i, j);
+        screenArray.push(filterInput);
+
+        // If it's not at the end of the string,
+        // also slice the operator via j to j+1.
+        if (isEnd === false) {
+            screenArray.push(string.slice(j, j + 1));
+        }
 
         return screenArray;
     }
@@ -412,22 +520,20 @@ class calculator {
         return screenArray;
     }
 
-    sliceScreen(string, screenArray, i, j, isEnd) {
-        // Slices the string and appends it to
-        // screenArray.
+    add(input1, input2) {
+        return input1 + input2;
+    }
 
-        // filterInput is the slice from i to j, which
-        // is usually the number.
-        let filterInput = string.slice(i, j);
-        screenArray.push(filterInput);
+    subtract(input1, input2) {
+        return input1 - input2;
+    }
 
-        // If it's not at the end of the string,
-        // also slice the operator via j to j+1.
-        if (isEnd === false) {
-            screenArray.push(string.slice(j, j + 1));
-        }
+    multiply(input1, input2) {
+        return input1 * input2;
+    }
 
-        return screenArray;
+    divide(input1, input2) {
+        return input1 / input2;
     }
 
     checkError(screenArray) {
@@ -535,22 +641,6 @@ class calculator {
         }
 
         return screenArray;
-    }
-
-    add(input1, input2) {
-        return input1 + input2;
-    }
-
-    subtract(input1, input2) {
-        return input1 - input2;
-    }
-
-    multiply(input1, input2) {
-        return input1 * input2;
-    }
-
-    divide(input1, input2) {
-        return input1 / input2;
     }
 }
 
