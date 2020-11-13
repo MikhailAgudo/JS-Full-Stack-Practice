@@ -10,7 +10,7 @@ function Book(title, author, pages, haveRead) {
         } else {
             readStatus = "not read yet";
         }
-        return `${title} by ${author}, ${pages}, ${readStatus}.`;
+        return `${title} by ${author}, ${pages} pages, ${readStatus}.`;
     }
 }
 
@@ -20,7 +20,7 @@ function unitTest() {
     let seasonOfStorms = new Book("The Season of Storms",
         "Andrej Sapkowski", "416", false);
     
-    const WOF_TEST = "The Warlock of Firetop Mountain by Ian Livingstone and Steve Jacksone, 188 pages, has been read.";
+    const WOF_TEST = "The Warlock of Firetop Mountain by Ian Livingstone and Steve Jackson, 188 pages, has been read.";
     const SOS_TEST = "The Season of Storms by Andrej Sapkowski, 416 pages, not read yet.";
 
     if (warlockOfFiretop.info() === WOF_TEST) {
