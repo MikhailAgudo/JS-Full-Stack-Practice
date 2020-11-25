@@ -1,6 +1,7 @@
 // A class for the UI and makes books for $myLibrary.
 
 let myLibrary = [];
+let cardGrid = null;
 
 function Book(author, title, pageCount, hasRead) {
     // The constructor...
@@ -23,6 +24,92 @@ function changeReadStatus(index) {
     } else {
         targetBook.hasRead = true;
     }
+}
+
+function createBookCard(index, inputBook) {
+    let newCard = document.createElement("div");
+
+    newCard.style.border = "none";
+    newCard.style.borderRadius = "10px";
+    newCard.style.margin = "1em";
+    newCard.style.backgroundColor = "white";
+    newCard.style.display = "flex";
+    newCard.style.flexDirection = "row";
+
+    newCard.dataset.index = index;
+
+    let cardInfo = document.createElement("div");
+    let bookTitle = document.createElement("h1");
+    let bookAuthor = document.createElement("h2");
+    let pageAndRead = document.createElement("p");
+
+    bookTitle.textContent = inputBook.title;
+    bookAuthor.textContent = inputBook.author;
+    switch (inputBook.hasRead) {
+        case true:
+            pageAndRead.textContent = `${inputBook.pageCount}
+                , finished reading.`;
+            break;
+        case false:
+            pageAndRead.textContent = `${inputBook.pageCount}
+                , haven't started.`;
+            break;
+    }
+    
+    cardInfo.appendChild(bookTitle);
+    cardInfo.appendChild(bookAuthor);
+    cardInfo.appendChild(pageAndRead);
+
+    let cardButtons = document.createElement("div");
+    let removeButton = document.createElement("button");
+    let statusButton = document.createElement("button");
+
+    cardButtons.style.display = "flex";
+    cardButtons.style.flexDirection = "column";
+
+    removeButton.textContent = "REMOVE";
+    removeButton.style.backgroundColor = "red";
+    removeButton.style.border = "none";
+    removeButton.style.borderRadius = "10px";
+    removeButton.addEventListener("click", (e) => {
+        myLibrary.splice(newCard.dataset.index, 1);
+    });
+
+    statusButton.textContent = "READ IT";
+    statusButton.style.backgroundColor = "gray";
+    statusButton.style.border = "none";
+    statusButton.style.borderRadius = "10px";
+    statusButton.addEventListener("click", (e) => {
+        changeReadStatus(newCard.dataset.index);
+    });
+
+    cardButtons.appendChild(removeButton);
+    cardButtons.appendChild(statusButton);
+
+    newCard.appendChild(cardInfo);
+    newCard.appendChild(cardButtons);
+
+    return newCard;
+}
+
+function createGridCards() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        let newCard = createBookCard(i, myLibrary[i]);
+        cardGrid.appendChild(newCard);
+    }
+}
+
+function initializeUI() {
+    cardGrid = document.createElement("div");
+    cardGrid.style.justifySelf = "center";
+    cardGrid.style.display = "grid";
+    cardGrid.style.gridTemplateColumns = "auto auto auto auto";
+    cardGrid.style.width = "50%";
+
+    createGridCards();
+
+    let body = document.querySelector("body");
+    body.appendChild(cardGrid);
 }
 
 function checkCorrectBookParameters(index, author, title, pageCount, hasRead) {
@@ -66,3 +153,4 @@ function unitTest() {
 }
 
 unitTest();
+initializeUI();
