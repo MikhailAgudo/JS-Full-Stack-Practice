@@ -31,10 +31,10 @@ function createBookCard(index, inputBook) {
 
     newCard.style.border = "none";
     newCard.style.borderRadius = "10px";
-    newCard.style.margin = "1em";
+    newCard.style.padding = "1em";
     newCard.style.backgroundColor = "white";
     newCard.style.display = "flex";
-    newCard.style.flexDirection = "row";
+    newCard.style.flexDirection = "column";
 
     newCard.dataset.index = index;
 
@@ -65,7 +65,7 @@ function createBookCard(index, inputBook) {
     let statusButton = document.createElement("button");
 
     cardButtons.style.display = "flex";
-    cardButtons.style.flexDirection = "column";
+    cardButtons.style.flexDirection = "row";
 
     removeButton.textContent = "REMOVE";
     removeButton.style.backgroundColor = "red";
@@ -101,7 +101,7 @@ function createGridCards() {
 
 function initializeUI() {
     cardGrid = document.createElement("div");
-    cardGrid.style.justifySelf = "center";
+    cardGrid.style.margin = "auto";
     cardGrid.style.display = "grid";
     cardGrid.style.gridTemplateColumns = "auto auto auto auto";
     cardGrid.style.width = "50%";
@@ -109,6 +109,8 @@ function initializeUI() {
     createGridCards();
 
     let body = document.querySelector("body");
+    body.style.backgroundColor = "rgb(50, 50, 50)";
+
     body.appendChild(cardGrid);
 }
 
