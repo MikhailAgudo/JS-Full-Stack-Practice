@@ -104,21 +104,27 @@ function createGridCards() {
 }
 
 function initializeUI() {
-    //let middleStrip = docume
-
-    cardGrid = document.createElement("div");
-    cardGrid.style.backgroundColor = "white";
-    cardGrid.style.margin = "auto";
-    cardGrid.style.display = "grid";
-    cardGrid.style.gridTemplateColumns = "auto auto auto auto";
-    cardGrid.style.width = "50%";
-
-    createGridCards();
-
     let body = document.querySelector("body");
     body.style.backgroundColor = "rgb(50, 50, 50)";
 
-    body.appendChild(cardGrid);
+    let middleStrip = document.createElement("div");
+    middleStrip.style.backgroundColor = "white";
+    middleStrip.style.margin = "auto";
+    middleStrip.style.width = "50%";
+
+    let websiteTitle = document.createElement("h1");
+    websiteTitle.textContent = "My Reading List";
+    websiteTitle.style.textAlign = "center";
+
+    cardGrid = document.createElement("div");
+    cardGrid.style.display = "grid";
+    cardGrid.style.gridTemplateColumns = "auto auto auto auto";
+
+    createGridCards();
+
+    middleStrip.appendChild(websiteTitle);
+    middleStrip.appendChild(cardGrid);
+    body.appendChild(middleStrip);
 }
 
 function checkCorrectBookParameters(index, author, title, pageCount, hasRead) {
