@@ -29,8 +29,9 @@ function changeReadStatus(index) {
 function createBookCard(index, inputBook) {
     let newCard = document.createElement("div");
 
-    newCard.style.border = "none";
+    newCard.style.border = "solid 1px gray";
     newCard.style.borderRadius = "10px";
+    newCard.style.margin = "1em";
     newCard.style.padding = "1em";
     newCard.style.backgroundColor = "white";
     newCard.style.display = "flex";
@@ -39,20 +40,18 @@ function createBookCard(index, inputBook) {
     newCard.dataset.index = index;
 
     let cardInfo = document.createElement("div");
-    let bookTitle = document.createElement("h1");
-    let bookAuthor = document.createElement("h2");
+    let bookTitle = document.createElement("h2");
+    let bookAuthor = document.createElement("h3");
     let pageAndRead = document.createElement("p");
 
     bookTitle.textContent = inputBook.title;
     bookAuthor.textContent = inputBook.author;
     switch (inputBook.hasRead) {
         case true:
-            pageAndRead.textContent = `${inputBook.pageCount}
-                , finished reading.`;
+            pageAndRead.textContent = `${inputBook.pageCount}, finished reading.`;
             break;
         case false:
-            pageAndRead.textContent = `${inputBook.pageCount}
-                , haven't started.`;
+            pageAndRead.textContent = `${inputBook.pageCount}, haven't started.`;
             break;
     }
     
@@ -66,21 +65,25 @@ function createBookCard(index, inputBook) {
 
     cardButtons.style.display = "flex";
     cardButtons.style.flexDirection = "row";
+    cardButtons.style.marginTop = "auto";
 
     removeButton.textContent = "REMOVE";
     removeButton.style.backgroundColor = "red";
     removeButton.style.border = "none";
     removeButton.style.borderRadius = "10px";
+    removeButton.style.marginRight = "0.5em";
     removeButton.addEventListener("click", (e) => {
         myLibrary.splice(newCard.dataset.index, 1);
+        createGridCards();
     });
 
-    statusButton.textContent = "READ IT";
+    statusButton.textContent = "READ";
     statusButton.style.backgroundColor = "gray";
     statusButton.style.border = "none";
     statusButton.style.borderRadius = "10px";
     statusButton.addEventListener("click", (e) => {
         changeReadStatus(newCard.dataset.index);
+        createGridCards();
     });
 
     cardButtons.appendChild(removeButton);
@@ -93,6 +96,7 @@ function createBookCard(index, inputBook) {
 }
 
 function createGridCards() {
+    cardGrid.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
         let newCard = createBookCard(i, myLibrary[i]);
         cardGrid.appendChild(newCard);
@@ -100,7 +104,10 @@ function createGridCards() {
 }
 
 function initializeUI() {
+    //let middleStrip = docume
+
     cardGrid = document.createElement("div");
+    cardGrid.style.backgroundColor = "white";
     cardGrid.style.margin = "auto";
     cardGrid.style.display = "grid";
     cardGrid.style.gridTemplateColumns = "auto auto auto auto";
@@ -135,14 +142,15 @@ function checkCorrectBookParameters(index, author, title, pageCount, hasRead) {
 
 function unitTest() {
     addBookToLibrary("Andrej Sapkowski", "Season of Storms", 415, false);
-    addBookToLibrary("Tales of the Dying Earth", "Jack Vance", 300.0, true);
+    addBookToLibrary("Jack Vance", "Tales of the Dying Earth", 300.0, true);
+    addBookToLibrary("Jack Vance", "Tales of the Dying Earth", 300.0, true);
 
     const SOS_RESULT = checkCorrectBookParameters(0, 
         "Andrej Sapkowski", 
         "Season of Storms", 415, false);
     const TOTDE_RESULT = checkCorrectBookParameters(1,
-        "Tales of the Dying Earth", 
-        "Jack Vance", 300.0, true);
+        "Jack Vance", 
+        "Tales of the Dying Earth", 300.0, true);
     console.log(`First: ${SOS_RESULT}`);
     console.log(`Second: ${TOTDE_RESULT}`);
 
