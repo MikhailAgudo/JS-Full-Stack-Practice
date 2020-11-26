@@ -15,6 +15,7 @@ function addBookToLibrary(author, title, pageCount, hasRead) {
     // Do stuff here
     const NEW_BOOK = new Book(author, title, pageCount, hasRead);
     myLibrary.push(NEW_BOOK);
+    localStorage["library"] = myLibrary;
 }
 
 function changeReadStatus(index) {
@@ -103,9 +104,71 @@ function createGridCards() {
     }
 }
 
+function createPopUp() {
+    let popUp = document.createElement("div");
+    popUp.style.zIndex = "1";
+    popUp.style.position = "fixed";
+    popUp.style.display = "none";
+    popUp.style.left = "0";
+    popUp.style.top = "0";
+    popUp.style.overflow = "auto";
+    popUp.style.backgroundColor = "rgba(0,0,0,0.4)";
+    popUp.style.width = "100%";
+    popUp.style.height = "100%";
+
+    let popUpContent = document.createElement("div");
+    popUpContent.style.padding = "2em";
+    popUpContent.style.backgroundColor = "white";
+    popUpContent.style.display = "flex";
+    popUpContent.style.flexDirection = "column";
+    popUpContent.style.width = "20em";
+    popUpContent.style.margin = "auto";
+
+    let authorInput = document.createElement("input");
+    authorInput.type = "text";
+    authorInput.placeholder = "Andrej Sapkowski";
+    popUpContent.appendChild(authorInput);
+
+    let titleInput = document.createElement("input");
+    titleInput.type = "text";
+    titleInput.placeholder = "Baptism of Fire";
+    popUpContent.appendChild(titleInput);
+
+    let pageInput = document.createElement("input");
+    pageInput.type = "number";
+    pageInput.placeholder = "100";
+    popUpContent.appendChild(pageInput);
+
+    let readInput = document.createElement("input");
+    readInput.type = "checkbox";
+    readInput.checked = true;
+    popUpContent.appendChild(readInput);
+
+    let submitButton = document.createElement("button");
+    submitButton.textContent = "Submit";
+    submitButton.addEventListener("click", (e) => {
+        console.log("Click!");
+        addBookToLibrary(authorInput.value, titleInput.value,
+            pageInput.value, readInput.checked);
+        createGridCards();
+        popUp.style.display = "none";
+    });
+    popUpContent.appendChild(submitButton);
+
+    popUp.appendChild(popUpContent);
+
+    return popUp
+}
+
+function createButtonPop(popUp) {
+
+}
+
 function initializeUI() {
     let body = document.querySelector("body");
     body.style.backgroundColor = "rgb(50, 50, 50)";
+
+    let popUp = createPopUp();
 
     let middleStrip = document.createElement("div");
     middleStrip.style.backgroundColor = "white";
@@ -116,15 +179,23 @@ function initializeUI() {
     websiteTitle.textContent = "My Reading List";
     websiteTitle.style.textAlign = "center";
 
+    let addBookButton = document.createElement("button");
+    addBookButton.textContent = "+ Add Book";
+    addBookButton.addEventListener("click", (e) => {
+        popUp.style.display = "block";
+    });
+
     cardGrid = document.createElement("div");
     cardGrid.style.display = "grid";
-    cardGrid.style.gridTemplateColumns = "auto auto auto auto";
+    cardGrid.style.gridTemplateColumns = "auto auto auto";
 
     createGridCards();
 
     middleStrip.appendChild(websiteTitle);
+    middleStrip.appendChild(addBookButton);
     middleStrip.appendChild(cardGrid);
     body.appendChild(middleStrip);
+    body.appendChild(popUp);
 }
 
 function checkCorrectBookParameters(index, author, title, pageCount, hasRead) {
@@ -148,8 +219,8 @@ function checkCorrectBookParameters(index, author, title, pageCount, hasRead) {
 
 function unitTest() {
     addBookToLibrary("Andrej Sapkowski", "Season of Storms", 415, false);
-    addBookToLibrary("Jack Vance", "Tales of the Dying Earth", 300.0, true);
-    addBookToLibrary("Jack Vance", "Tales of the Dying Earth", 300.0, true);
+    addBookToLibrary("Jack Vance", "Tales of the Dying Earth", 300.0, false);
+    addBookToLibrary("Mars Gravity", "Against the Gods", 10000.0, true);
 
     const SOS_RESULT = checkCorrectBookParameters(0, 
         "Andrej Sapkowski", 
