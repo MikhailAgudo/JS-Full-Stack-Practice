@@ -12,10 +12,8 @@ function Book(author, title, pageCount, hasRead) {
 }
 
 function addBookToLibrary(author, title, pageCount, hasRead) {
-    // Do stuff here
     const NEW_BOOK = new Book(author, title, pageCount, hasRead);
     myLibrary.push(NEW_BOOK);
-    localStorage["library"] = myLibrary;
 }
 
 function changeReadStatus(index) {
@@ -28,6 +26,13 @@ function changeReadStatus(index) {
 }
 
 function createBookCard(index, inputBook) {
+    // Initiate the container div. It has flex and
+    // $flexDirectio as "column" so that the items go
+    // downward as they're added.
+    // We need a data-attribute, which is $dataset in
+    // JavaScript. We shall call it $index because
+    // later on we'll use the index of the myLibrary
+    // array to delete this card if needed.
     let newCard = document.createElement("div");
 
     newCard.style.border = "solid 1px gray";
@@ -47,6 +52,9 @@ function createBookCard(index, inputBook) {
 
     bookTitle.textContent = inputBook.title;
     bookAuthor.textContent = inputBook.author;
+
+    // This exists so we get a string telling us
+    // that something has been read or not.
     switch (inputBook.hasRead) {
         case true:
             pageAndRead.textContent = `${inputBook.pageCount}, finished reading.`;
@@ -74,6 +82,8 @@ function createBookCard(index, inputBook) {
     removeButton.style.borderRadius = "10px";
     removeButton.style.marginRight = "0.5em";
     removeButton.addEventListener("click", (e) => {
+        // Delete one part of the array then re-render
+        // the card grid via createGridCards().
         myLibrary.splice(newCard.dataset.index, 1);
         createGridCards();
     });
@@ -83,6 +93,8 @@ function createBookCard(index, inputBook) {
     statusButton.style.border = "none";
     statusButton.style.borderRadius = "10px";
     statusButton.addEventListener("click", (e) => {
+        // Lets us revert the $hasRead variable
+        // then re-render the card grid.
         changeReadStatus(newCard.dataset.index);
         createGridCards();
     });
@@ -97,7 +109,10 @@ function createBookCard(index, inputBook) {
 }
 
 function createGridCards() {
+    // Get rid of the DOM nodes within the cardGrid
+    // div, then do the loop to add new cards.
     cardGrid.innerHTML = '';
+
     for (let i = 0; i < myLibrary.length; i++) {
         let newCard = createBookCard(i, myLibrary[i]);
         cardGrid.appendChild(newCard);
@@ -105,6 +120,16 @@ function createGridCards() {
 }
 
 function createPopUp() {
+    // $popUp has to be "none" as its $display so that
+    // it doesn't completely appear. Its $width and $height
+    // must be 100% so that the $backgroundColor appears
+    // with its translucent black, which helps us have the user
+    // focus on the form.
+    // $zIndex must be > 0 so that it appears on top of
+    // everything else.
+    // $left and $top are 0 so that the div starts at the
+    // top left.
+    // Everything else is fairly straightforward.
     let popUp = document.createElement("div");
     popUp.style.zIndex = "1";
     popUp.style.position = "fixed";
@@ -147,10 +172,12 @@ function createPopUp() {
     let submitButton = document.createElement("button");
     submitButton.textContent = "Submit";
     submitButton.addEventListener("click", (e) => {
-        console.log("Click!");
         addBookToLibrary(authorInput.value, titleInput.value,
             pageInput.value, readInput.checked);
         createGridCards();
+
+        // "none" so that the form disappears from user's
+        // sight.
         popUp.style.display = "none";
     });
     popUpContent.appendChild(submitButton);
@@ -165,9 +192,12 @@ function createButtonPop(popUp) {
 }
 
 function initializeUI() {
+    // Initialize the body where we can add everything.
     let body = document.querySelector("body");
     body.style.backgroundColor = "rgb(50, 50, 50)";
 
+    // $popUp will be used for $addBookButton's function
+    // of making the form appear.
     let popUp = createPopUp();
 
     let middleStrip = document.createElement("div");
