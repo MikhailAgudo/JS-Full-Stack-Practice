@@ -1,6 +1,9 @@
 const gameBoard = (() => {
-    const EMPTY_BOARD = [0,0,0,0,0,0,0,0,0];
-    let board = [0,0,0,0,0,0,0,0,0];
+    const EMPTY_BOARD = () => {
+        return [0,0,0,0,0,0,0,0,0];
+    }
+
+    let board = EMPTY_BOARD();
     let turnStatus = 1;
     let victoryStatus = 0;
 
@@ -21,8 +24,7 @@ const gameBoard = (() => {
     };
 
     const resetBoard = () => {
-        console.log(`REPLACING ${board} with ${EMPTY_BOARD}`);
-        board = [0,0,0,0,0,0,0,0,0];
+        board = EMPTY_BOARD();
         turnStatus = 1;
         victoryStatus = 0;
     }
