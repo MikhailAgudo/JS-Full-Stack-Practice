@@ -120,6 +120,13 @@ const unitTest = (() => {
     };
 })();
 
+const Player = (playerNumber) => {
+    const getPlayer = () => playerNumber;
+}
+
+const circlePlayer = Player(1);
+const crossPlayer = Player(2);
+
 unitTest.testVictory([1,0,0,1,0,0,1,0,0], 1);
 unitTest.testVictory([0,1,0,0,1,0,0,1,0], 1);
 unitTest.testVictory([0,0,1,0,0,1,0,0,1], 1);
@@ -137,6 +144,5 @@ unitTest.testVictory([0,0,0,2,2,2,0,0,0], 2);
 unitTest.testVictory([0,0,0,0,0,0,2,2,2], 2);
 unitTest.testVictory([2,0,0,0,2,0,0,0,2], 2);
 unitTest.testVictory([0,0,2,0,2,0,2,0,0], 2);
-
 unitTest.simulateMatch([4,8,3,2,5],1);
 unitTest.simulateMatch([7,6,4,1,0,8,5,3],0)
