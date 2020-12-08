@@ -6,6 +6,30 @@ const gameBoard = (() => {
     let board = EMPTY_BOARD();
     let turnStatus = 1;
     let victoryStatus = 0;
+    let announcer = document.querySelector("#announcer");
+
+    const initializeUI = () => {
+        resetBoard();
+        let boardSquares = document.querySelectorAll(".boardSquare");
+        console.log(boardSquares.length);
+        boardSquares = insertGame(boardSquares);
+    }
+
+    const insertGame = (boardSquares) => {
+        for (let i = 0; i < boardSquares.length; i++) {
+            let currentSquare = boardSquares[i];
+            currentSquare.addEventListener("click", () => {
+                let boardIndex = currentSquare.dataset.grid;
+                placeOnTile(boardIndex);
+                currentSquare.textContent = board[boardIndex];
+            });
+        }
+        return boardSquares;
+    }
+
+    const makeGrid = () => {
+        let newGrid = document.createElement("div");
+    }
 
     const returnVictory = () => {
         return victoryStatus;
@@ -37,8 +61,18 @@ const gameBoard = (() => {
         }
     }
 
+    const checkLegalMoves = () => {
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] === 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     const placeOnTile = (index) => {
-        if (victoryStatus === 0 && board[index] === 0) {
+        if (victoryStatus === 0 && board[index] === 0 &&
+            checkLegalMoves() === true) {
             board[index] = turnStatus;
             changeTurn();
             checkVictory();
@@ -74,9 +108,14 @@ const gameBoard = (() => {
         // Diagonals
         checkPattern(0, 1, 1, 4);
         checkPattern(2, 3, 1, 2);
+
+        if (checkLegalMoves() === false) {
+
+        }
     };
 
     return {
+        initializeUI,
         replaceBoard,
         overrideVictory,
         placeOnTile,
@@ -124,25 +163,7 @@ const Player = (playerNumber) => {
     const getPlayer = () => playerNumber;
 }
 
+gameBoard.initializeUI();
+
 const circlePlayer = Player(1);
 const crossPlayer = Player(2);
-
-unitTest.testVictory([1,0,0,1,0,0,1,0,0], 1);
-unitTest.testVictory([0,1,0,0,1,0,0,1,0], 1);
-unitTest.testVictory([0,0,1,0,0,1,0,0,1], 1);
-unitTest.testVictory([1,1,1,0,0,0,0,0,0], 1);
-unitTest.testVictory([0,0,0,1,1,1,0,0,0], 1);
-unitTest.testVictory([0,0,0,0,0,0,1,1,1], 1);
-unitTest.testVictory([0,1,0,0,0,1,0,1,0], 0);
-unitTest.testVictory([1,0,0,0,1,0,0,0,1], 1);
-unitTest.testVictory([0,0,1,0,1,0,1,0,0], 1);
-unitTest.testVictory([2,0,0,2,0,0,2,0,0], 2);
-unitTest.testVictory([0,2,0,0,2,0,0,2,0], 2);
-unitTest.testVictory([0,0,2,0,0,2,0,0,2], 2);
-unitTest.testVictory([2,2,2,0,0,0,0,0,0], 2);
-unitTest.testVictory([0,0,0,2,2,2,0,0,0], 2);
-unitTest.testVictory([0,0,0,0,0,0,2,2,2], 2);
-unitTest.testVictory([2,0,0,0,2,0,0,0,2], 2);
-unitTest.testVictory([0,0,2,0,2,0,2,0,0], 2);
-unitTest.simulateMatch([4,8,3,2,5],1);
-unitTest.simulateMatch([7,6,4,1,0,8,5,3],0)
