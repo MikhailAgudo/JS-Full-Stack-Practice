@@ -1,3 +1,6 @@
+.bodyBackground {
+    background-color: rgb(50,50,50);
+}
 .boardContainer {
     margin: auto;
     width: 10em;
@@ -15,5 +18,5 @@
 }
 
 #announcer {
-    
+
 }

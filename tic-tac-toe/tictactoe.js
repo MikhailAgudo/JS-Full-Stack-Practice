@@ -51,6 +51,7 @@ const gameBoard = (() => {
         board = EMPTY_BOARD();
         turnStatus = 1;
         victoryStatus = 0;
+        announcer.textContent = "";
     }
 
     const changeTurn = () => {
@@ -94,6 +95,7 @@ const gameBoard = (() => {
                 board[i] !== 0) {
                 //console.log(`Victory!`);
                 victoryStatus = checkedValue;
+                announcer.textContent = `Player ${victoryStatus} wins!`
             }
         }
     };
@@ -109,8 +111,8 @@ const gameBoard = (() => {
         checkPattern(0, 1, 1, 4);
         checkPattern(2, 3, 1, 2);
 
-        if (checkLegalMoves() === false) {
-
+        if (checkLegalMoves() === false && victoryStatus === 0) {
+            announcer.textContent = "Tie!";
         }
     };
 
@@ -163,7 +165,28 @@ const Player = (playerNumber) => {
     const getPlayer = () => playerNumber;
 }
 
-gameBoard.initializeUI();
-
 const circlePlayer = Player(1);
 const crossPlayer = Player(2);
+
+unitTest.testVictory([1,0,0,1,0,0,1,0,0], 1);
+unitTest.testVictory([0,1,0,0,1,0,0,1,0], 1);
+unitTest.testVictory([0,0,1,0,0,1,0,0,1], 1);
+unitTest.testVictory([1,1,1,0,0,0,0,0,0], 1);
+unitTest.testVictory([0,0,0,1,1,1,0,0,0], 1);
+unitTest.testVictory([0,0,0,0,0,0,1,1,1], 1);
+unitTest.testVictory([0,1,0,0,0,1,0,1,0], 0);
+unitTest.testVictory([1,0,0,0,1,0,0,0,1], 1);
+unitTest.testVictory([0,0,1,0,1,0,1,0,0], 1);
+unitTest.testVictory([2,0,0,2,0,0,2,0,0], 2);
+unitTest.testVictory([0,2,0,0,2,0,0,2,0], 2);
+unitTest.testVictory([0,0,2,0,0,2,0,0,2], 2);
+unitTest.testVictory([2,2,2,0,0,0,0,0,0], 2);
+unitTest.testVictory([0,0,0,2,2,2,0,0,0], 2);
+unitTest.testVictory([0,0,0,0,0,0,2,2,2], 2);
+unitTest.testVictory([2,0,0,0,2,0,0,0,2], 2);
+unitTest.testVictory([0,0,2,0,2,0,2,0,0], 2);
+unitTest.simulateMatch([4,8,3,2,5],1);
+unitTest.simulateMatch([7,6,4,1,0,8,5,3],0)
+
+
+gameBoard.initializeUI();
