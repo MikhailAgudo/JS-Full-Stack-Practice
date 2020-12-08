@@ -2,8 +2,9 @@
     background-color: rgb(50,50,50);
 }
 .boardContainer {
-    margin: auto;
+    margin: 10% auto auto auto;
     width: 10em;
+    color: white;
 }
 
 .boardGrid {
@@ -14,7 +15,10 @@
 }
 
 .boardSquare {
-
+    background-color: rgb(13, 118, 49);
+    color: white;
+    border: none;
+    border-radius: 10px;
 }
 
 #announcer {
