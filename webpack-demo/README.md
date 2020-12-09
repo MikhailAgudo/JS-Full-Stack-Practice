@@ -1,0 +1,2 @@
+# Webpack Demo
+A simple demo that I did from [Webpack website's Gettin Started](https://webpack.js.org/guides/getting-started/) page. Done as a part of [the Odin Project](https://theodinproject.com/lessons/es6-modules).
