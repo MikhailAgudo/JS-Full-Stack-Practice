@@ -3,6 +3,10 @@
     flex-direction: row;
 }
 
+.homeTab {
+    text-align: center;
+}
+
 .menuTab {
     display: grid;
     padding: 1em;
