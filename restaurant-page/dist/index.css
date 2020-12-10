@@ -6,11 +6,17 @@
 .menuTab {
     display: grid;
     padding: 1em;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 1em;
 }
 
 .menuCard {
+    border: 1px solid black;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
+    padding: 1em;
+    text-align: center;
 }
 
 .tabButton {
