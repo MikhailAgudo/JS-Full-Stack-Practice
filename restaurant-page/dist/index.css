@@ -1,0 +1,22 @@
+.tabs {
+    display: flex;
+    flex-direction: row;
+}
+
+.menuTab {
+    display: grid;
+    padding: 1em;
+}
+
+.menuCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.tabButton {
+
+}
+
+#content {
+
+}

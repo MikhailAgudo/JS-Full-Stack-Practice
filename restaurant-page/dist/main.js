@@ -1,1 +1,1 @@
-console.log("Test.");
+(()=>{"use strict";document.createElement("div"),(void document.querySelector(".tabs")).initializeTabs()})();
