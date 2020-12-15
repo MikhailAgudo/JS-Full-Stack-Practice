@@ -1,0 +1,30 @@
+### Starting Projects
+1. `npm init`
+2. `npm install webpack webpack-cli`
+3. .gitignore with "node_modules/"
+4. make ./src/index.js
+5. make ./dist/index.html
+6. make ./webpack.config.js with:
+
+```
+const path = require('path');
+
+module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+};
+```
+7. have index.html reference main.js
+8. use npx webpack --watch so you don't have to redo the same command
+
+### General Plan
+- task class/factory function
+  has title, description, dueDate, priority, and step
+- module that handles putting quests into the quest's task array
+- module that sorts the tasks by priority and name
+- module that initiates buttons and other UI-related functions
+- module that handles tab-changing and such, tabs are in a sidebar;
+  generally handle all UI stuffs

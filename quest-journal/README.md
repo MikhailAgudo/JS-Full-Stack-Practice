@@ -1,0 +1,2 @@
+# Quest Journal
+This is a project derived from [the Odin Project's Todo List](https://theodinproject.com/courses/javascript/lessons/todo-list), rethemed into a quest journal usable for tabletop and computer roleplaying games.

@@ -1,0 +1,15 @@
+{
+  "name": "quest-journal",
+  "version": "1.0.0",
+  "description": "This is a project derived from [the Odin Project's Todo List](https://theodinproject.com/courses/javascript/lessons/todo-list), rethemed into a quest journal usable for tabletop and computer roleplaying games.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
+  }
+}
