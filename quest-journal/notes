@@ -21,10 +21,10 @@ module.exports = {
 8. use npx webpack --watch so you don't have to redo the same command
 
 ### General Plan
-- task class/factory function
+-/ task class/factory function
   has title, description, dueDate, priority, and step
-- module that handles putting quests into the quest's task array
-- module that sorts the tasks by priority and name
+-/ module that handles putting quests into the quest's task array
+-/ module that sorts the tasks by priority and name
 - module that initiates buttons and other UI-related functions
 - module that handles tab-changing and such, tabs are in a sidebar;
   generally handle all UI stuffs
