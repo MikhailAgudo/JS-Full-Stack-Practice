@@ -38,7 +38,7 @@ const questStructurer = (() => {
     }
 
     const removeTask = (questIndex, taskIndex) => {
-        getQuests(index).removeTask(taskIndex);
+        getQuest(questIndex).removeTask(taskIndex);
     }
 
     const getTask = (questIndex, taskIndex) => {

@@ -2,6 +2,7 @@ import { questStructurer } from './quest/questStructurer.js';
 
 const unitTest = (() => {
     let testNumber = 0;
+    let fails = 0;
 
     const testOutcome = (outcome) => {
         testNumber++;
@@ -9,7 +10,7 @@ const unitTest = (() => {
         if (outcome === true) {
             console.log(`Test ${testNumber} passed.`);
         } else {
-            console.log(`Test ${testNumber} failed.`)
+            console.log(`Test ${testNumber} F-A-I-L-E-D.`)
         }
     }
 
@@ -23,6 +24,7 @@ const unitTest = (() => {
         if (output === expected) {
             testOutcome(true);
         } else {
+            fails++;
             testOutcome(false);
         }
     }
@@ -33,6 +35,10 @@ const unitTest = (() => {
 
     const getLatestTaskIndex = () => {
         return questStructurer.quests[getLatestQuestIndex()].getTaskAmount() - 1;
+    }
+
+    const getLatestTaskCount = () => {
+        return questStructurer.quests[getLatestQuestIndex()].getTaskAmount();
     }
 
     const checkQuest = (inputTitle) => {
@@ -61,10 +67,45 @@ const unitTest = (() => {
         testCase(latestPriority, inputPriority);
     }
 
+    const checkQuestCount = (expected) => {
+        let count = questStructurer.quests.length;
+
+        testCase(count, expected);
+    }
+
+    const checkTaskCount = (expected) => {
+        let count = getLatestTaskCount();
+
+        testCase(count, expected);
+    }
+
+    const checkRemoveTask = (expected) => {
+        questStructurer.removeTask(getLatestQuestIndex(), getLatestTaskIndex());
+        let count = getLatestTaskCount();
+
+        testCase(count, expected);
+    }
+
+    const checkRemoveQuest = (expected) => {
+        questStructurer.removeQuest(getLatestQuestIndex());
+        let count = questStructurer.quests.length;
+
+        testCase(count, expected);
+    }
+
     const testProcess = () => {
         checkQuest("Clear the Cave");
         checkTask("Go to Mindwolf Forest", "You must kill the bandits.", Date.now(), 3);
+        checkTask("Talk to the Sorceress Elina", "She lives in a hut somewhere in the mountains.", Date.now(), 2);
 
+        checkQuestCount(1);
+        checkTaskCount(2);
+
+        checkRemoveTask(1);
+        checkRemoveTask(0);
+        checkRemoveQuest(0);
+
+        console.log(`Number of failed tests: ${fails}`);
         questStructurer.resetQuests();
     }
 
