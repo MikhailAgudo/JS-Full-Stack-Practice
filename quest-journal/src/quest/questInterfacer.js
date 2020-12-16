@@ -4,7 +4,7 @@ const questInterfacer = (() => {
         return title;
     }
     return {
-        
+        strucTitle
     }
 })();
 

@@ -18,6 +18,10 @@ const questStructurer = (() => {
         quests.splice(index, 1);
     }
 
+    const getQuest = (index) => {
+        return quests[index];
+    }
+
     const resetQuests = () => {
         quests = [];
     }
@@ -30,43 +34,53 @@ const questStructurer = (() => {
 
         let newTask = Task(title, description, dueDate, priority);
 
-        quests[index].addTask(newTask);
+        getQuest(index).addTask(newTask);
     }
 
     const removeTask = (questIndex, taskIndex) => {
-        quests[questIndex].removeTask(taskIndex);
+        getQuests(index).removeTask(taskIndex);
     }
 
     const getTask = (questIndex, taskIndex) => {
-        
+        return quests[questIndex].getTask(taskIndex)
     }
 
     const renameTitle = (questIndex, taskIndex, title) => {
         title = taskInterfacer.strucString(title);
 
-        quests[questIndex].getTask(taskIndex).setTitle(title);
+        getTask(questIndex, taskIndex).setTitle(title);
     }
 
     const changeDescription = (questIndex, taskIndex, description) => {
         description = taskInterfacer.strucString(description);
 
-        quests[questIndex].getTask(taskIndex).setDescription(description);
+        getTask(questIndex, taskIndex).setDescription(description);
     }
 
     const changeDate = (questIndex, taskIndex, dueDate) => {
         dueDate = taskInterfacer.strucDueDate(dueDate);
 
-        quests[questIndex].getTask(taskIndex).setDueDate(dueDate);
+        getTask(questIndex, taskIndex).setDueDate(dueDate);
     }
 
     const changePriority = (questIndex, taskIndex, priority) => {
         priority = taskInterfacer.strucPriority(priority);
 
-        quests[questIndex].getTask(taskIndex).setPriority(priority);
+        getTask(questIndex, taskIndex).setPriority(priority);
     }
 
     return {
-
+        quests,
+        addQuest,
+        removeQuest,
+        getQuest,
+        resetQuests,
+        addTask,
+        removeTask,
+        renameTitle,
+        changeDescription,
+        changeDate,
+        changePriority
     }
 })();
 
