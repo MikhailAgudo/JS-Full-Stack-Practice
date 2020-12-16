@@ -14,31 +14,58 @@ const unitTest = (() => {
     }
 
     const printCase = (output, expected) => {
-        console.log(`${output} ~OUTPUT~ vs.`);
-        console.log(`${expected} ~EXP.~`);
+        console.log(`---${output} ~OUTPUT~ vs.`);
+        console.log(`---${expected} ~EXP.~`);
     }
 
-    const checkQuest = (inputTitle) => {
-        questStructurer.addQuest(inputTitle);
-
-        let latestIndex = questStructurer.quests.length - 1;
-        let latestQuestTitle = questStructurer.quests[latestIndex].getTitle();
-
-        printCase(latestQuestTitle, inputTitle);
-
-        if (latestQuestTitle === inputTitle) {
+    const testCase = (output, expected) => {
+        printCase(output, expected);
+        if (output === expected) {
             testOutcome(true);
         } else {
             testOutcome(false);
         }
     }
 
-    const checkTask = (inputTitle, inputDescription, inputDueDate, inputPriority) => {
+    const getLatestQuestIndex = () => {
+        return questStructurer.quests.length - 1;
+    }
 
+    const getLatestTaskIndex = () => {
+        return questStructurer.quests[getLatestQuestIndex()].getTaskAmount() - 1;
+    }
+
+    const checkQuest = (inputTitle) => {
+        questStructurer.addQuest(inputTitle);
+
+        let latestIndex = getLatestQuestIndex()
+        let latestQuestTitle = questStructurer.quests[latestIndex].getTitle();
+
+        testCase(latestQuestTitle, inputTitle);
+    }
+
+    const checkTask = (inputTitle, inputDescription, inputDueDate, inputPriority) => {
+        let latestIndex = getLatestQuestIndex();
+        questStructurer.addTask(inputTitle, inputDescription, inputDueDate, inputPriority, latestIndex);
+
+        let latestQuest = questStructurer.quests[latestIndex];
+        let latestTask = latestQuest.getTask(getLatestTaskIndex());
+        let latestTitle = latestTask.getTitle();
+        let latestDescription = latestTask.getDescription();
+        let latestDueDate = latestTask.getDueDate();
+        let latestPriority = latestTask.getPriority();
+
+        testCase(latestTitle, inputTitle);
+        testCase(latestDescription, inputDescription);
+        testCase(latestDueDate, inputDueDate);
+        testCase(latestPriority, inputPriority);
     }
 
     const testProcess = () => {
         checkQuest("Clear the Cave");
+        checkTask("Go to Mindwolf Forest", "You must kill the bandits.", Date.now(), 3);
+
+        questStructurer.resetQuests();
     }
 
     return {
