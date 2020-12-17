@@ -28,3 +28,4 @@ module.exports = {
 - module that initiates buttons and other UI-related functions
 - module that handles tab-changing and such, tabs are in a sidebar;
   generally handle all UI stuffs
+- expanding tasks is probably related to hovering and stuff

@@ -131,18 +131,29 @@ const unitTest = (() => {
         testCase(taskTitles, expected);
     }
 
+    const checkTaskDescriptionArray = (expected) => {
+        let tasks = questStructurer.quests[getLatestQuestIndex()].getTasks();
+        let lastIndex = tasks.length - 1;
+        let taskTitles = uiInterfacer.transformToUIReadable(tasks, [], lastIndex, "description");
+
+        testCase(taskTitles, expected);
+    }
+
     const testProcess = () => {
         let quest01 = "Bandits Amassing";
         let quest02 = "Vedivoll's Troubles";
         let task01 = "Go to Mindwolf Forest";
         let task02 = "Talk to the Sorceress Elina";
+        let desc01 = "You must kill the bandits.";
+        let desc02 = "She lives in a hut somewhere in the mountains.";
 
         checkQuest(quest01);
-        checkTask(task01, "You must kill the bandits.", Date.now(), 3);
-        checkTask(task02, "She lives in a hut somewhere in the mountains.", Date.now(), 2);
+        checkTask(task01, desc01, Date.now(), 3);
+        checkTask(task02, desc02, Date.now(), 2);
         checkSwapTask(0, 1, task01)
 
         checkTaskTitleArray([task02, task01]);
+        checkTaskDescriptionArray([desc02, desc01]);
 
         checkQuestCount(1);
         checkTaskCount(2);

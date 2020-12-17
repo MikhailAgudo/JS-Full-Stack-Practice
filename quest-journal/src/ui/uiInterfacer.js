@@ -10,8 +10,10 @@ const uiInterfacer = (() => {
                     break;
                 case "description":
                     output.unshift(input[lastIndex].getDescription());
+                    break;
                 case "date":
                     output.unshift(input[lastIndex].getDueDate());
+                    break;
             }
             lastIndex = lastIndex - 1;
             return transformToUIReadable(input, output, lastIndex, mode);
