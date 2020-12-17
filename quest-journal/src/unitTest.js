@@ -106,7 +106,7 @@ const unitTest = (() => {
     const checkQuestTitleArray = (expected) => {
         let quests = questStructurer.quests;
         let lastIndex = quests.length - 1
-        let questTitles = uiInterfacer.questsToTitleArray(quests, [], lastIndex);
+        let questTitles = uiInterfacer.transformToUIReadable(quests, [], lastIndex, "title");
 
         questTitles = String(questTitles);
         expected = String(expected);

@@ -1,16 +1,23 @@
 const uiInterfacer = (() => {
-    const questsToTitleArray = (quests, questTitles, lastIndex) => {
+    const transformToUIReadable = (input, output, lastIndex, mode) => {
         //let questTitles = []
         if (lastIndex === -1) {
-            return questTitles;
+            return output;
         } else {
-            questTitles.unshift(quests[lastIndex].getTitle());
+            switch (mode) {
+                case "title":
+                    output.unshift(input[lastIndex].getTitle());
+                    break;
+                case "description":
+                    output.unshift(input[lastIndex].getDescription());
+            }
             lastIndex = lastIndex - 1;
-            return questsToTitleArray(quests, questTitles, lastIndex);
+            return transformToUIReadable(input, output, lastIndex, mode);
         }
     }
+
     return {
-        questsToTitleArray
+        transformToUIReadable
     }
 })();
 
