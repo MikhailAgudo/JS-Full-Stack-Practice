@@ -1,4 +1,5 @@
 import { questStructurer } from './quest/questStructurer.js';
+import { uiInterfacer } from './ui/uiInterfacer.js';
 
 const unitTest = (() => {
     let testNumber = 0;
@@ -102,18 +103,39 @@ const unitTest = (() => {
         testCase(outputTitle, expectedTitle);
     }
 
+    const checkQuestTitleArray = (expected) => {
+        let quests = questStructurer.quests;
+        let lastIndex = quests.length - 1
+        let questTitles = uiInterfacer.questsToTitleArray(quests, [], lastIndex);
+
+        questTitles = String(questTitles);
+        expected = String(expected);
+
+        testCase(questTitles, expected);
+    }
+
     const testProcess = () => {
-        checkQuest("Clear the Cave");
-        checkTask("Go to Mindwolf Forest", "You must kill the bandits.", Date.now(), 3);
-        checkTask("Talk to the Sorceress Elina", "She lives in a hut somewhere in the mountains.", Date.now(), 2);
-        checkSwapTask(0, 1, "Go to Mindwolf Forest")
+        let quest01 = "Bandits Amassing";
+        let quest02 = "Vedivoll's Troubles";
+        let task01 = "Go to Mindwolf Forest";
+        let task02 = "Talk to the Sorceress Elina";
+
+        checkQuest(quest01);
+        checkTask(task01, "You must kill the bandits.", Date.now(), 3);
+        checkTask(task02, "She lives in a hut somewhere in the mountains.", Date.now(), 2);
+        checkSwapTask(0, 1, task01)
 
         checkQuestCount(1);
         checkTaskCount(2);
 
         checkRemoveTask(1);
         checkRemoveTask(0);
-        checkRemoveQuest(0);
+
+        checkQuest(quest02);
+
+        checkQuestTitleArray([quest01, quest02]);
+        
+        checkRemoveQuest(1);
 
         console.log(`Number of failed tests: ${fails}`);
         questStructurer.resetQuests();
