@@ -93,10 +93,20 @@ const unitTest = (() => {
         testCase(count, expected);
     }
 
+    const checkSwapTask = (firstIndex, secondIndex, expectedTitle) => {
+        let latestQuest = questStructurer.quests[getLatestQuestIndex()];
+        latestQuest.processSwap(firstIndex);
+        latestQuest.processSwap(secondIndex);
+
+        let outputTitle = latestQuest.getTask(getLatestTaskIndex()).getTitle();
+        testCase(outputTitle, expectedTitle);
+    }
+
     const testProcess = () => {
         checkQuest("Clear the Cave");
         checkTask("Go to Mindwolf Forest", "You must kill the bandits.", Date.now(), 3);
         checkTask("Talk to the Sorceress Elina", "She lives in a hut somewhere in the mountains.", Date.now(), 2);
+        checkSwapTask(0, 1, "Go to Mindwolf Forest")
 
         checkQuestCount(1);
         checkTaskCount(2);
