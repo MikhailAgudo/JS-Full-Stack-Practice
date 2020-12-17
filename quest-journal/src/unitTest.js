@@ -105,13 +105,24 @@ const unitTest = (() => {
 
     const checkQuestTitleArray = (expected) => {
         let quests = questStructurer.quests;
-        let lastIndex = quests.length - 1
+        let lastIndex = quests.length - 1;
         let questTitles = uiInterfacer.transformToUIReadable(quests, [], lastIndex, "title");
 
         questTitles = String(questTitles);
         expected = String(expected);
 
         testCase(questTitles, expected);
+    }
+
+    const checkTaskTitleArray = (expected) => {
+        let tasks = questStructurer.quests[getLatestQuestIndex()].getTasks();
+        let lastIndex = tasks.length - 1;
+        let taskTitles = uiInterfacer.transformToUIReadable(tasks, [], lastIndex, "title");
+
+        taskTitles = String(taskTitles);
+        expected = String(expected);
+
+        testCase(taskTitles, expected);
     }
 
     const testProcess = () => {
@@ -124,6 +135,8 @@ const unitTest = (() => {
         checkTask(task01, "You must kill the bandits.", Date.now(), 3);
         checkTask(task02, "She lives in a hut somewhere in the mountains.", Date.now(), 2);
         checkSwapTask(0, 1, task01)
+
+        checkTaskTitleArray([task02, task01]);
 
         checkQuestCount(1);
         checkTaskCount(2);
