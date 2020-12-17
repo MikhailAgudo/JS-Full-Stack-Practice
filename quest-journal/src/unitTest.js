@@ -20,8 +20,20 @@ const unitTest = (() => {
         console.log(`---${expected} ~EXP.~`);
     }
 
+    const arrayToStringCase = (array) => {
+        if (Array.isArray(array) === true) {
+            array = String(array);
+        }
+
+        return array;
+    }
+
     const testCase = (output, expected) => {
+        output = arrayToStringCase(output);
+        expected = arrayToStringCase(expected);
+
         printCase(output, expected);
+
         if (output === expected) {
             testOutcome(true);
         } else {
@@ -108,9 +120,6 @@ const unitTest = (() => {
         let lastIndex = quests.length - 1;
         let questTitles = uiInterfacer.transformToUIReadable(quests, [], lastIndex, "title");
 
-        questTitles = String(questTitles);
-        expected = String(expected);
-
         testCase(questTitles, expected);
     }
 
@@ -118,9 +127,6 @@ const unitTest = (() => {
         let tasks = questStructurer.quests[getLatestQuestIndex()].getTasks();
         let lastIndex = tasks.length - 1;
         let taskTitles = uiInterfacer.transformToUIReadable(tasks, [], lastIndex, "title");
-
-        taskTitles = String(taskTitles);
-        expected = String(expected);
 
         testCase(taskTitles, expected);
     }

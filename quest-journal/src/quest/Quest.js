@@ -20,9 +20,7 @@ const Quest = (title) => {
     }
 
     const addTask = (task) => {
-        console.log(`CHECK ${task.getTitle()}`);
         tasks.push(task);
-        console.log(`CHECK ${tasks[0].getTitle()}`);
     }
 
     const removeTask = (index) => {
