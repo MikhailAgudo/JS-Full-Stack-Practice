@@ -20,8 +20,20 @@ const uiInterfacer = (() => {
         }
     }
 
+    // add method to calculate indexes for questRenderer
+    const questsToTitles = (quests) => {
+        let questTitles = [];
+        for (let i = 0; i < quests.length; i++) {
+            let newTitle = quests[i].getTitle();
+            questTitles.push(newTitle);
+        }
+
+        return questTitles;
+    }
+
     return {
-        transformToUIReadable
+        transformToUIReadable,
+        questsToTitles
     }
 })();
 

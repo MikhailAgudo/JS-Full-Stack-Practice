@@ -1,0 +1,20 @@
+.journal-section {
+    display: flex;
+    flex-direction: row;
+}
+
+.quest-section {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.task-section {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.task-container {
+    
+}

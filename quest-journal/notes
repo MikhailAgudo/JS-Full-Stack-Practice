@@ -29,3 +29,8 @@ module.exports = {
 - module that handles tab-changing and such, tabs are in a sidebar;
   generally handle all UI stuffs
 - expanding tasks is probably related to hovering and stuff
+- localStorage:
+  A module dedicated to saving: checks a value to see X amount of tasks, then saves on the next value.
+    Like "task" + String(current) + mode, can mean "task5desc" and then loads the description of the 5th task
+    might be important to assign the index of the quest in the name
+  Recursion function to load them all back

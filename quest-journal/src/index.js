@@ -1,4 +1,5 @@
-import { questStructurer } from './quest/questStructurer.js';
+import { Journal } from './Journal.js';
 import { unitTest } from './unitTest.js';
 
-unitTest.testProcess();
+//unitTest.testProcess();
+Journal.initializeJournal();
