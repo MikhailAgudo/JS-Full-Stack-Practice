@@ -1,3 +1,5 @@
+import { questStructurer } from './../quest/questStructurer.js';
+
 const taskRenderer = (() => {
     const render = (task) => {
         // early version of render()
@@ -21,7 +23,11 @@ const taskRenderer = (() => {
         newTask.appendChild(taskPriority);
 
         return newTask;
-    } 
+    }
+    const createDeleteButton = (i) => {
+
+    }
+
     return {
         render
     }

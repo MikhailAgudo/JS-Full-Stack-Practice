@@ -31,12 +31,14 @@ const questRenderer = (() => {
         return taskSection;
     }
 
-    const renderQuestTab = (questTitles) => {
+    const renderQuestTab = () => {
         // The title array indexes should be arranged the same way
         // so there's little need to store indexes. Data sets will
         // gain the index from the actual array arrangement.
 
         resetQuestTab();
+
+        let questTitles = getQuestTitles();
 
         renderQuests(questTitles);
     }
@@ -63,8 +65,10 @@ const questRenderer = (() => {
         return newQuest;
     }
 
-    const renderTaskTab = (tasks) => {
+    const renderTaskTab = () => {
         resetTaskTab();
+
+        let tasks = getTasks();
 
         renderTasks(tasks);
     }
