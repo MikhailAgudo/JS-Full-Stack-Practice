@@ -75,7 +75,7 @@ const questRenderer = (() => {
 
     const renderTasks = (tasks) => {
         for (let i = 0; i < tasks.length; i++) {
-            let newTask = taskRenderer.render(tasks[i]);
+            let newTask = taskRenderer.render(tasks[i], displayedQuest, i);
 
             taskSection.appendChild(newTask);
         }
