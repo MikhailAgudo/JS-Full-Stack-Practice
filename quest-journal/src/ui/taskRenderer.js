@@ -1,19 +1,19 @@
 const taskRenderer = (() => {
-    const render = (title, description, dueDate, priority) => {
+    const render = (task) => {
         // early version of render()
         let task = document.createElement("div");
 
         let taskTitle = document.createElement("div");
-        taskTitle.textContent = title;
+        taskTitle.textContent = task.getTitle();
 
         let taskDescription = document.createElement("div");
-        taskDescription.textContent = description;
+        taskDescription.textContent = task.getDescription();
 
         let taskDueDate = document.createElement("div");
-        taskDueDate.textContent = dueDate;
+        taskDueDate.textContent = task.getDueDate();
 
         let taskPriority = document.createElement("div");
-        taskPriority.textContent = priority;
+        taskPriority.textContent = task.getPriority();
 
         task.appendChild(taskTitle);
         task.appendChild(taskDescription);

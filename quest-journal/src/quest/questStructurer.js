@@ -18,6 +18,10 @@ const questStructurer = (() => {
         quests.splice(index, 1);
     }
 
+    const getQuests = () => {
+        return quests;
+    }
+
     const getQuest = (index) => {
         return quests[index];
     }
@@ -42,6 +46,8 @@ const questStructurer = (() => {
     }
 
     const getTask = (questIndex, taskIndex) => {
+        // Flagged for cleaning.
+        // Seems like a useless function.
         return quests[questIndex].getTask(taskIndex)
     }
 
@@ -73,6 +79,7 @@ const questStructurer = (() => {
         quests,
         addQuest,
         removeQuest,
+        getQuests,
         getQuest,
         resetQuests,
         addTask,
