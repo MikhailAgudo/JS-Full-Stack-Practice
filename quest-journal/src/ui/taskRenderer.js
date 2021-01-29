@@ -4,6 +4,7 @@ const taskRenderer = (() => {
         let newTask = document.createElement("div");
 
         let taskTitle = document.createElement("div");
+        console.log(task.getTitle());
         taskTitle.textContent = task.getTitle();
 
         let taskDescription = document.createElement("div");
@@ -15,10 +16,10 @@ const taskRenderer = (() => {
         let taskPriority = document.createElement("div");
         taskPriority.textContent = task.getPriority();
 
-        task.appendChild(taskTitle);
-        task.appendChild(taskDescription);
-        task.appendChild(taskDueDate);
-        task.appendChild(taskPriority);
+        newTask.appendChild(taskTitle);
+        newTask.appendChild(taskDescription);
+        newTask.appendChild(taskDueDate);
+        newTask.appendChild(taskPriority);
 
         return newTask;
     } 

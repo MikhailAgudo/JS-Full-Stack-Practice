@@ -63,7 +63,7 @@ const questRenderer = (() => {
     const renderTaskTab = (tasks) => {
         resetTaskTab();
 
-        renderTasks();
+        renderTasks(tasks);
     }
 
     const renderTasks = (tasks) => {
@@ -82,10 +82,15 @@ const questRenderer = (() => {
         taskSection.innerHTML = "";
     }
 
+    const getDisplayedQuestIndex = () => {
+        return displayedQuest;
+    }
+
     return {
         initializeJournal,
         renderQuestTab,
-        renderTaskTab
+        renderTaskTab,
+        getDisplayedQuestIndex
     }
 })();
 

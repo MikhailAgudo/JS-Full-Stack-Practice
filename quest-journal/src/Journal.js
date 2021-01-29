@@ -13,10 +13,21 @@ const Journal = (() => {
         let questTitles = uiInterfacer.questsToTitles(questStructurer.quests);
 
         questRenderer.renderQuestTab(questTitles);
+
+        let displayedQuest = questRenderer.getDisplayedQuestIndex();
+        questRenderer.renderTaskTab(questStructurer.quests[displayedQuest].getTasks());
     }
 
     const addSampleQuests = () => {
         questStructurer.addQuest("Joining the Legion");
+
+        questStructurer.addTask("Legate Rikke",
+            "In order to prove myself to Legate Rikke, I am to clear out the bandits living at Fort Hraggstad.",
+            "tomorrow Pepeg",
+            "1",
+            0
+        );
+
         questStructurer.addQuest("The Jagged Crown");
         questStructurer.addQuest("Message to Whiterun");
     }
