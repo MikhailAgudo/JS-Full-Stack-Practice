@@ -46,12 +46,18 @@ const questRenderer = (() => {
         for ( let i = 0; i < questTitles.length; i++) {
             // have onclick method change $displayedQuest
             // then do renderTaskTab()
-            let newQuest = document.createElement("div");
-            newQuest.textContent = questTitles[i];
-            newQuest.dataset.index = i;
+            let newQuest = renderQuest(questTitles, i);
 
             questSection.appendChild(newQuest);
         }
+    }
+
+    const renderQuest = (questTitles, index) => {
+        let newQuest = document.createElement("div");
+        newQuest.textContent = questTitles[index];
+        newQuest.dataset.index = index;
+
+        return newQuest;
     }
 
     const renderTaskTab = (tasks) => {
@@ -62,9 +68,9 @@ const questRenderer = (() => {
 
     const renderTasks = (tasks) => {
         for (let i = 0; i < tasks.length; i++) {
-            let task = taskRenderer.render(tasks[i]);
+            let newTask = taskRenderer.render(tasks[i]);
 
-            taskSection.appendChild(task);
+            taskSection.appendChild(newTask);
         }
     }
 

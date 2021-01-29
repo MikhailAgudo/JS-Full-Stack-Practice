@@ -1,7 +1,7 @@
 const taskRenderer = (() => {
     const render = (task) => {
         // early version of render()
-        let task = document.createElement("div");
+        let newTask = document.createElement("div");
 
         let taskTitle = document.createElement("div");
         taskTitle.textContent = task.getTitle();
@@ -20,7 +20,7 @@ const taskRenderer = (() => {
         task.appendChild(taskDueDate);
         task.appendChild(taskPriority);
 
-        return task;
+        return newTask;
     } 
     return {
         render
