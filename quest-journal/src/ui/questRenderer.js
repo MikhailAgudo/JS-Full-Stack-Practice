@@ -53,9 +53,12 @@ const questRenderer = (() => {
     }
 
     const renderQuest = (questTitles, index) => {
-        let newQuest = document.createElement("div");
+        let newQuest = document.createElement("button");
         newQuest.textContent = questTitles[index];
         newQuest.dataset.index = index;
+        newQuest.addEventListener("click", (e) => {
+            changeDisplayedQuest(index);
+        })
 
         return newQuest;
     }
@@ -80,6 +83,17 @@ const questRenderer = (() => {
 
     const resetTaskTab = () => {
         taskSection.innerHTML = "";
+    }
+
+    const changeDisplayedQuest = (index) => {
+        displayedQuest = index;
+
+        let questTitles = uiInterfacer.questsToTitles(questStructurer.quests);
+
+        console.log(displayedQuest);
+
+        renderQuestTab(questTitles);
+        renderTaskTab(questStructurer.quests[displayedQuest].getTasks());
     }
 
     const getDisplayedQuestIndex = () => {
