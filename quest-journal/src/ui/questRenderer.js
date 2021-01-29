@@ -88,23 +88,32 @@ const questRenderer = (() => {
     const changeDisplayedQuest = (index) => {
         displayedQuest = index;
 
-        let questTitles = uiInterfacer.questsToTitles(questStructurer.quests);
-
-        console.log(displayedQuest);
-
+        let questTitles = getQuestTitles();
         renderQuestTab(questTitles);
-        renderTaskTab(questStructurer.quests[displayedQuest].getTasks());
+
+        let tasks = getTasks();
+        renderTaskTab(tasks);
     }
 
     const getDisplayedQuestIndex = () => {
         return displayedQuest;
     }
 
+    const getQuestTitles = () => {
+        return uiInterfacer.questsToTitles(questStructurer.quests);
+    }
+
+    const getTasks = () => {
+        return questStructurer.quests[displayedQuest].getTasks();
+    }
+
     return {
         initializeJournal,
         renderQuestTab,
         renderTaskTab,
-        getDisplayedQuestIndex
+        getDisplayedQuestIndex,
+        getQuestTitles,
+        getTasks
     }
 })();
 

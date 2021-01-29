@@ -4,7 +4,6 @@ const taskRenderer = (() => {
         let newTask = document.createElement("div");
 
         let taskTitle = document.createElement("div");
-        console.log(task.getTitle());
         taskTitle.textContent = task.getTitle();
 
         let taskDescription = document.createElement("div");

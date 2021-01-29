@@ -10,12 +10,12 @@ const Journal = (() => {
     }
 
     const initializeQuests = () => {
-        let questTitles = uiInterfacer.questsToTitles(questStructurer.quests);
+        let questTitles = questRenderer.getQuestTitles();
 
         questRenderer.renderQuestTab(questTitles);
 
         let displayedQuest = questRenderer.getDisplayedQuestIndex();
-        questRenderer.renderTaskTab(questStructurer.quests[displayedQuest].getTasks());
+        questRenderer.renderTaskTab(questRenderer.getTasks());
     }
 
     const addSampleQuests = () => {
@@ -23,6 +23,13 @@ const Journal = (() => {
 
         questStructurer.addTask("Legate Rikke",
             "In order to prove myself to Legate Rikke, I am to clear out the bandits living at Fort Hraggstad.",
+            "tomorrow Pepeg",
+            "1",
+            0
+        );
+
+        questStructurer.addTask("Prove Your Usefulness",
+            "Report to Legate Rikke.",
             "tomorrow Pepeg",
             "1",
             0
