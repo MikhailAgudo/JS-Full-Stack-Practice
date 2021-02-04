@@ -51,13 +51,15 @@ const questRenderer = (() => {
     }
 
     const renderNewQuest = () => {
-        let questButton = functionRenderer.createAddQuestButton();
-        questSection.appendChild(questButton);
+        let questButton = null;
 
         if(functionRenderer.getNewQuestPrompt() === true) {
-            let prompt = functionRenderer.createAddQuestPrompt();
-            questSection.appendChild(prompt);
+            questButton = functionRenderer.createAddQuestPrompt();
+        } else {
+            questButton = functionRenderer.createAddQuestButton();
         }
+        
+        questSection.appendChild(questButton);
     }
 
     const renderQuests = (questTitles) => {
