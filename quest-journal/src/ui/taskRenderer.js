@@ -22,8 +22,8 @@ const taskRenderer = (() => {
 
         newTask.appendChild(taskTitle);
         newTask.appendChild(taskDescription);
-        newTask.appendChild(taskDueDate);
-        newTask.appendChild(taskPriority);
+        //newTask.appendChild(taskDueDate);
+        //newTask.appendChild(taskPriority);
         newTask.appendChild(deleteButton);
 
         return newTask;
