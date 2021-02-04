@@ -1,6 +1,7 @@
 import { questStructurer } from './../quest/questStructurer.js';
 import { questInterfacer } from './../quest/questInterfacer.js';
 import { taskRenderer } from './taskRenderer.js';
+import { functionRenderer } from './functionRenderer.js';
 import { uiInterfacer } from './uiInterfacer.js';
 
 const questRenderer = (() => {
@@ -32,15 +33,31 @@ const questRenderer = (() => {
     }
 
     const renderQuestTab = () => {
+        // A good alternative to handling rendering is to
+        // push elements into an array and have those be read
+        // one by one at the final phase.
+
         // The title array indexes should be arranged the same way
         // so there's little need to store indexes. Data sets will
         // gain the index from the actual array arrangement.
 
         resetQuestTab();
 
+        renderNewQuest();
+
         let questTitles = getQuestTitles();
 
         renderQuests(questTitles);
+    }
+
+    const renderNewQuest = () => {
+        let questButton = functionRenderer.createAddQuestButton();
+        questSection.appendChild(questButton);
+
+        if(functionRenderer.getNewQuestPrompt() === true) {
+            let prompt = functionRenderer.createAddQuestPrompt();
+            questSection.appendChild(prompt);
+        }
     }
 
     const renderQuests = (questTitles) => {
