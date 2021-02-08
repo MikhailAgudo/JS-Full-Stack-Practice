@@ -43,21 +43,13 @@ const functionRenderer = (() => {
     const createAddQuestPrompt = () => {
         let promptContainer = document.createElement("div");
 
-        let newInput = createInput("Quest Name...");
+        let newInput = createInput("Quest name...");
         let submitQuest = createSubmitQuestButton(newInput);
 
         promptContainer.appendChild(newInput);
         promptContainer.appendChild(submitQuest);
 
         return promptContainer;
-    }
-
-    const createInput = (placeholder) => {
-        let newInput = document.createElement("input");
-        newInput.type = "text";
-        newInput.placeholder = placeholder;
-
-        return newInput;
     }
 
     const createSubmitQuestButton = (newInput) => {
@@ -74,23 +66,59 @@ const functionRenderer = (() => {
         return submitQuest;
     }
 
+    const createAddTaskButton = () => {
+        let taskButton = document.createElement("button");
+        taskButton.textContent = "New Task";
+        taskButton.addEventListener("click", () => {
+            toggleTask();
+            questRenderer.renderTaskTab();
+        })
+
+        return taskButton;
+    }
+
+    const createAddTaskPrompt = () => {
+        let promptContainer = document.createElement("div");
+
+        let newInput = createInput("Task name...");
+        let submitTask = createSubmitTaskButton(newInput);
+
+        promptContainer.appendChild(newInput);
+        promptContainer.appendChild(submitTask);
+
+        return promptContainer;
+    }
+
     const createSubmitTaskButton = (newInput) => {
         let submitTask = document.createElement("button");
         submitTask.textContent = "Add";
 
         submitTask.addEventListener("click", () => {
-            questStructurer.addTask(newInput.value);
+            let displayedQuest = questRenderer.getDisplayedQuestIndex();
+            questStructurer.addTask(newInput.value, displayedQuest);
 
             toggleTask();
             questRenderer.renderTaskTab();
         })
+
+        return submitTask;
+    }
+
+    const createInput = (placeholder) => {
+        let newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.placeholder = placeholder;
+
+        return newInput;
     }
 
     return {
         getNewQuestPrompt,
         getNewTaskPrompt,
         createAddQuestButton,
-        createAddQuestPrompt
+        createAddQuestPrompt,
+        createAddTaskButton,
+        createAddTaskPrompt
     }
 })();
 

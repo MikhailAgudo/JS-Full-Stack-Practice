@@ -87,9 +87,23 @@ const questRenderer = (() => {
     const renderTaskTab = () => {
         resetTaskTab();
 
+        renderNewTask();
+
         let tasks = getTasks();
 
         renderTasks(tasks);
+    }
+
+    const renderNewTask = () => {
+        let taskButton = null;
+
+        if(functionRenderer.getNewTaskPrompt() === true) {
+            taskButton = functionRenderer.createAddTaskPrompt();
+        } else {
+            taskButton = functionRenderer.createAddTaskButton();
+        }
+        
+        taskSection.appendChild(taskButton);
     }
 
     const renderTasks = (tasks) => {
