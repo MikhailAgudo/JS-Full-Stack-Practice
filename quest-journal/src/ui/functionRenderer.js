@@ -65,7 +65,6 @@ const functionRenderer = (() => {
         submitQuest.textContent = "Add";
 
         submitQuest.addEventListener("click", (e) => {
-            console.log(newInput.value);
             questStructurer.addQuest(newInput.value);
 
             toggleQuest();
@@ -73,6 +72,18 @@ const functionRenderer = (() => {
         });
 
         return submitQuest;
+    }
+
+    const createSubmitTaskButton = (newInput) => {
+        let submitTask = document.createElement("button");
+        submitTask.textContent = "Add";
+
+        submitTask.addEventListener("click", () => {
+            questStructurer.addTask(newInput.value);
+
+            toggleTask();
+            questRenderer.renderTaskTab();
+        })
     }
 
     return {

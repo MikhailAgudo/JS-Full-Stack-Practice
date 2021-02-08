@@ -21,17 +21,13 @@ const Journal = (() => {
     const addSampleQuests = () => {
         questStructurer.addQuest("Joining the Legion");
 
-        questStructurer.addTask("Legate Rikke",
+        questStructurer.addTask(
             "In order to prove myself to Legate Rikke, I am to clear out the bandits living at Fort Hraggstad.",
-            "tomorrow Pepeg",
-            "1",
             0
         );
 
-        questStructurer.addTask("Prove Your Usefulness",
+        questStructurer.addTask(
             "Report to Legate Rikke.",
-            "tomorrow Pepeg",
-            "1",
             0
         );
 

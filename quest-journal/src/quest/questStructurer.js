@@ -30,13 +30,10 @@ const questStructurer = (() => {
         quests = [];
     }
 
-    const addTask = (title, description, dueDate, priority, index) => {
-        title = taskInterfacer.strucString(title);
+    const addTask = (description, index) => {
         description = taskInterfacer.strucString(description);
-        dueDate = taskInterfacer.strucDueDate(dueDate);
-        priority = taskInterfacer.strucPriority(priority);
 
-        let newTask = Task(title, description, dueDate, priority);
+        let newTask = Task(description);
 
         getQuest(index).addTask(newTask);
     }

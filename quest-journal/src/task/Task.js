@@ -1,4 +1,4 @@
-const Task = (title, description, dueDate, priority) => {
+const Task = (description) => {
     const getTitle = () => {
         return title;
     }
