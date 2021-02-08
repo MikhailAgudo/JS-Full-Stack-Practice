@@ -16,5 +16,11 @@
 }
 
 .task-container {
-    
+    display: flex;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+.task-area {
+    border: 1px solid black;
 }
