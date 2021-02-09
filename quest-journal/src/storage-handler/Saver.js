@@ -1,18 +1,45 @@
 import { questStructurer } from './../quest/questStructurer.js';
 
 const Saver = (() => {
-    let questAmount = 0;
+    let questLength = 0;
     let tasks = [];
 
     const saveQuests = () => {
-        updateQuestAmount();
+        saveLengths();
 
-        let quests = questStructurer.getQuests();
-        updateTaskAmount(quests);
-
-        for (let i = 0; i < questAmount; i++) {
+        for (let i = 0; i < questLength; i++) {
             let quest = questStructurer.getQuest(i);
             saveQuest(i, quest);
+        }
+    }
+
+    const saveLengths = () => {
+        updateQuestAmount();
+        updateTaskAmount();
+
+        saveQuestLength();
+        saveTaskLengths(0);
+    }
+
+    const saveQuestLength = () => {
+        localStorage.setItem("questLength", questLength);
+    }
+
+    const saveTaskLengths = (indexStart) => {
+        let indexString = String(indexStart);
+        let finalKey = "quest" + indexString;
+
+        let taskLength = tasks.shift();
+        taskLength = String(taskLength);
+
+        finalKey += ("taskLength");
+
+        localStorage.setItem(finalKey, taskLength);
+
+        if (tasks.length === 0) {
+
+        } else {
+            saveTaskLengths(indexStart + 1);
         }
     }
 
@@ -39,10 +66,12 @@ const Saver = (() => {
     }
 
     const updateQuestAmount = () => {
-        questAmount = questStructurer.getQuests().length;
+        questLength = questStructurer.getQuests().length;
     }
 
-    const updateTaskAmount = (quests) => {
+    const updateTaskAmount = () => {
+        let quests = questStructurer.getQuests();
+
         tasks = [];
 
         for (let i = 0; i < quests.length; i++) {

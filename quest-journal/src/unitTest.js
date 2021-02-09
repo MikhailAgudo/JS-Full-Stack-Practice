@@ -156,6 +156,8 @@ const unitTest = (() => {
         Saver.saveQuests()
         console.log("local");
         console.log(localStorage.getItem("quest0task0"));
+        console.log(localStorage.getItem("questLength"));
+        console.log(localStorage.getItem("quest0taskLength"));
         Saver.resetStorage();
 
         checkRemoveTask(1);
