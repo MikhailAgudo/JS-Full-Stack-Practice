@@ -5,6 +5,8 @@ const Saver = (() => {
     let tasks = [];
 
     const saveQuests = () => {
+        resetStorage();
+        
         saveLengths();
 
         for (let i = 0; i < questLength; i++) {
