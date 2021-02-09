@@ -1,5 +1,6 @@
 import { questStructurer } from './quest/questStructurer.js';
 import { uiInterfacer } from './ui/uiInterfacer.js';
+import { Saver } from './storage-handler/Saver.js';
 
 const unitTest = (() => {
     let testNumber = 0;
@@ -63,21 +64,15 @@ const unitTest = (() => {
         testCase(latestQuestTitle, inputTitle);
     }
 
-    const checkTask = (inputTitle, inputDescription, inputDueDate, inputPriority) => {
+    const checkTask = (inputDescription) => {
         let latestIndex = getLatestQuestIndex();
-        questStructurer.addTask(inputTitle, inputDescription, inputDueDate, inputPriority, latestIndex);
+        questStructurer.addTask(inputDescription, latestIndex);
 
         let latestQuest = questStructurer.quests[latestIndex];
         let latestTask = latestQuest.getTask(getLatestTaskIndex());
-        let latestTitle = latestTask.getTitle();
         let latestDescription = latestTask.getDescription();
-        let latestDueDate = latestTask.getDueDate();
-        let latestPriority = latestTask.getPriority();
 
-        testCase(latestTitle, inputTitle);
         testCase(latestDescription, inputDescription);
-        testCase(latestDueDate, inputDueDate);
-        testCase(latestPriority, inputPriority);
     }
 
     const checkQuestCount = (expected) => {
@@ -106,13 +101,13 @@ const unitTest = (() => {
         testCase(count, expected);
     }
 
-    const checkSwapTask = (firstIndex, secondIndex, expectedTitle) => {
+    const checkSwapTask = (firstIndex, secondIndex, expectedDesc) => {
         let latestQuest = questStructurer.quests[getLatestQuestIndex()];
         latestQuest.processSwap(firstIndex);
         latestQuest.processSwap(secondIndex);
 
-        let outputTitle = latestQuest.getTask(getLatestTaskIndex()).getTitle();
-        testCase(outputTitle, expectedTitle);
+        let outputDesc = latestQuest.getTask(getLatestTaskIndex()).getDescription();
+        testCase(outputDesc, expectedDesc);
     }
 
     const checkQuestTitleArray = (expected) => {
@@ -126,7 +121,7 @@ const unitTest = (() => {
     const checkTaskTitleArray = (expected) => {
         let tasks = questStructurer.quests[getLatestQuestIndex()].getTasks();
         let lastIndex = tasks.length - 1;
-        let taskTitles = uiInterfacer.transformToUIReadable(tasks, [], lastIndex, "title");
+        let taskTitles = uiInterfacer.transformToUIReadable(tasks, [], lastIndex, "description");
 
         testCase(taskTitles, expected);
     }
@@ -148,11 +143,11 @@ const unitTest = (() => {
         let desc02 = "She lives in a hut somewhere in the mountains.";
 
         checkQuest(quest01);
-        checkTask(task01, desc01, Date.now(), 3);
-        checkTask(task02, desc02, Date.now(), 2);
-        checkSwapTask(0, 1, task01)
+        checkTask(desc01, 3);
+        checkTask(desc02, 2);
+        checkSwapTask(0, 1, desc01)
 
-        checkTaskTitleArray([task02, task01]);
+        checkTaskTitleArray([desc02, desc01]);
         checkTaskDescriptionArray([desc02, desc01]);
 
         checkQuestCount(1);
@@ -168,6 +163,9 @@ const unitTest = (() => {
         checkRemoveQuest(1);
 
         console.log(`Number of failed tests: ${fails}`);
+
+
+
         questStructurer.resetQuests();
     }
 

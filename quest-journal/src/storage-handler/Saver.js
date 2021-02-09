@@ -7,6 +7,11 @@ const Saver = (() => {
     const saveQuests = () => {
         updateQuestAmount();
         updateTaskAmount();
+
+        for (let i = 0; i < quests.length; i++) {
+            let quest = questStructurer.getQuest(i);
+            saveQuest(i, quest);
+        }
     }
 
     const saveQuest = (questIndex, quest) => {
@@ -49,7 +54,8 @@ const Saver = (() => {
     }
 
     return {
-
+        saveQuests,
+        resetStorage
     }
 })();
 

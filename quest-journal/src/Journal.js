@@ -1,11 +1,13 @@
 import { questStructurer } from './quest/questStructurer.js';
 import { questRenderer } from './ui/questRenderer.js';
+import { unitTest } from './unitTest.js';
 import { uiInterfacer } from './ui/uiInterfacer.js';
 
 const Journal = (() => {
     const initializeJournal = () => {
         questRenderer.initializeJournal();
-        addSampleQuests();
+        unitTest.testProcess();
+        //addSampleQuests();
         initializeQuests();
     }
 
