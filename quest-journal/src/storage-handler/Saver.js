@@ -62,7 +62,10 @@ const Saver = (() => {
             finalKey += "task";
             finalKey += i;
 
-            localStorage.setItem(finalKey, tasks[i].getDescription());
+            let taskDescription = tasks[i].getDescription();
+            console.log("SAVE: " + taskDescription)
+
+            localStorage.setItem(finalKey, taskDescription);
         }
     }
 
@@ -78,7 +81,7 @@ const Saver = (() => {
         for (let i = 0; i < quests.length; i++) {
             let quest = quests[i];
             let taskAmount = quest.getTaskAmount();
-            tasks.unshift(taskAmount);
+            tasks.push(taskAmount);
         }
     }
 

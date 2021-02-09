@@ -55,6 +55,7 @@ const Loader = (() => {
         for (let i = 0; i < taskLength; i++) {
             let finalTaskKey = finalKey + i;
             let taskDescription = localStorage.getItem(finalTaskKey);
+            console.log("LOAD:" + taskDescription);
 
             questStructurer.addTask(taskDescription, questIndex);
         }
