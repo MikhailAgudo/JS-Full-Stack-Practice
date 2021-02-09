@@ -1,14 +1,16 @@
 import { questStructurer } from './../quest/questStructurer.js';
 
 const Saver = (() => {
-    let quests = 0;
+    let questAmount = 0;
     let tasks = [];
 
     const saveQuests = () => {
         updateQuestAmount();
-        updateTaskAmount();
 
-        for (let i = 0; i < quests.length; i++) {
+        let quests = questStructurer.getQuests();
+        updateTaskAmount(quests);
+
+        for (let i = 0; i < questAmount; i++) {
             let quest = questStructurer.getQuest(i);
             saveQuest(i, quest);
         }
@@ -26,6 +28,7 @@ const Saver = (() => {
     }
 
     const saveTasks = (tasks, questFinalKey) => {
+        console.log(tasks.length);
         for (let i = 0; i < tasks.length; i++) {
             let finalKey = questFinalKey;
             finalKey += "task";
@@ -36,7 +39,7 @@ const Saver = (() => {
     }
 
     const updateQuestAmount = () => {
-        quests = questStructurer.getQuests().length;
+        questAmount = questStructurer.getQuests().length;
     }
 
     const updateTaskAmount = (quests) => {

@@ -153,6 +153,11 @@ const unitTest = (() => {
         checkQuestCount(1);
         checkTaskCount(2);
 
+        Saver.saveQuests()
+        console.log("local");
+        console.log(localStorage.getItem("quest0task0"));
+        Saver.resetStorage();
+
         checkRemoveTask(1);
         checkRemoveTask(0);
 
@@ -163,8 +168,6 @@ const unitTest = (() => {
         checkRemoveQuest(1);
 
         console.log(`Number of failed tests: ${fails}`);
-
-
 
         questStructurer.resetQuests();
     }
