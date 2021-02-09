@@ -6,7 +6,7 @@ const Saver = (() => {
 
     const saveQuests = () => {
         resetStorage();
-        
+
         saveLengths();
 
         for (let i = 0; i < questLength; i++) {
@@ -57,7 +57,6 @@ const Saver = (() => {
     }
 
     const saveTasks = (tasks, questFinalKey) => {
-        console.log(tasks.length);
         for (let i = 0; i < tasks.length; i++) {
             let finalKey = questFinalKey;
             finalKey += "task";

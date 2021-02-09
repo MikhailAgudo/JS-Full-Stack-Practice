@@ -1,5 +1,6 @@
 import { questRenderer } from './questRenderer.js';
 import { questStructurer } from './../quest/questStructurer.js';
+import { Saver } from './../storage-handler/Saver.js';
 
 const functionRenderer = (() => {
     let newQuest = false;
@@ -60,6 +61,7 @@ const functionRenderer = (() => {
             questStructurer.addQuest(newInput.value);
 
             toggleQuest();
+            Saver.saveQuests();
             questRenderer.renderQuestTab();
         });
 
@@ -98,6 +100,7 @@ const functionRenderer = (() => {
             questStructurer.addTask(newInput.value, displayedQuest);
 
             toggleTask();
+            Saver.saveQuests();
             questRenderer.renderTaskTab();
         })
 

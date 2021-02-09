@@ -9,7 +9,7 @@ const Journal = (() => {
         questRenderer.initializeJournal();
         //unitTest.testProcess();
         Loader.load();
-        addSampleQuests();
+        //addSampleQuests();
         initializeQuests();
     }
 

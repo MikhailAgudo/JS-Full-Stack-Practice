@@ -1,5 +1,6 @@
 import { questStructurer } from './../quest/questStructurer.js';
 import { questRenderer } from './questRenderer.js';
+import { Saver } from './../storage-handler/Saver.js';
 
 const taskRenderer = (() => {
     const render = (task, displayedQuest, i) => {
@@ -24,6 +25,7 @@ const taskRenderer = (() => {
         deleteButton.textContent = "Done";
         deleteButton.addEventListener("click", (e) => {
             questStructurer.removeTask(displayedQuest, i);
+            Saver.saveQuests();
             questRenderer.renderTaskTab();
         });
 
