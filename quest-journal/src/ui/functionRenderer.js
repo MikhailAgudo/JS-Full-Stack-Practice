@@ -1,6 +1,7 @@
 import { questRenderer } from './questRenderer.js';
 import { questStructurer } from './../quest/questStructurer.js';
 import { Saver } from './../storage-handler/Saver.js';
+import { Structurer } from './../Structurer.js';
 
 const functionRenderer = (() => {
     let newQuest = false;
@@ -47,8 +48,10 @@ const functionRenderer = (() => {
         let newInput = createInput("Quest name...");
         let submitQuest = createSubmitQuestButton(newInput);
 
-        promptContainer.appendChild(newInput);
-        promptContainer.appendChild(submitQuest);
+        Structurer.appendChildren(promptContainer, [
+            newInput,
+            submitQuest
+        ]);
 
         return promptContainer;
     }
@@ -85,8 +88,10 @@ const functionRenderer = (() => {
         let newInput = createInput("Task name...");
         let submitTask = createSubmitTaskButton(newInput);
 
-        promptContainer.appendChild(newInput);
-        promptContainer.appendChild(submitTask);
+        Structurer.appendChildren(promptContainer, [
+            newInput,
+            submitTask
+        ]);
 
         return promptContainer;
     }

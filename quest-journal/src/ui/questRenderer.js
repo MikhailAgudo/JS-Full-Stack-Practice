@@ -3,6 +3,7 @@ import { questInterfacer } from './../quest/questInterfacer.js';
 import { taskRenderer } from './taskRenderer.js';
 import { functionRenderer } from './functionRenderer.js';
 import { uiInterfacer } from './uiInterfacer.js';
+import { Structurer } from './../Structurer.js';
 
 const questRenderer = (() => {
     // These are global variables because most of the functions
@@ -16,8 +17,10 @@ const questRenderer = (() => {
         let questSection = createQuestSection();
         let taskSection = createTaskSection();
 
-        journalSection.appendChild(questSection);
-        journalSection.appendChild(taskSection);
+        Structurer.appendChildren(journalSection, [
+            questSection,
+            taskSection
+        ]);
     }
 
     const createQuestSection = () => {

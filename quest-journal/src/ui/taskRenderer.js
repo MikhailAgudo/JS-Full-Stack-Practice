@@ -1,6 +1,7 @@
 import { questStructurer } from './../quest/questStructurer.js';
 import { questRenderer } from './questRenderer.js';
 import { Saver } from './../storage-handler/Saver.js';
+import { Structurer } from './../Structurer.js';
 
 const taskRenderer = (() => {
     const render = (task, displayedQuest, i) => {
@@ -11,11 +12,10 @@ const taskRenderer = (() => {
 
         let deleteButton = createDeleteButton(displayedQuest, i);
 
-        //newTask.appendChild(taskTitle);
-        newTask.appendChild(deleteButton);
-        newTask.appendChild(taskDescription);
-        //newTask.appendChild(taskDueDate);
-        //newTask.appendChild(taskPriority);
+        Structurer.appendChildren(newTask, [
+            deleteButton,
+            taskDescription
+        ]);
 
         return newTask;
     }
