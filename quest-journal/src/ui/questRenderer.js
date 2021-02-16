@@ -147,7 +147,12 @@ const questRenderer = (() => {
     }
 
     const getTasks = () => {
-        return questStructurer.quests[displayedQuest].getTasks();
+        if ( questStructurer.quests.length > 0 ) {
+            return questStructurer.quests[displayedQuest].getTasks();
+        } else {
+            return [];
+        }
+        
     }
 
     return {
