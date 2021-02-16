@@ -12,7 +12,7 @@ const Journal = (() => {
         Loader.load();
         console.log("Loaded existing sotrage...");
         //addSampleQuests();
-        initializeQuests();
+        //initializeQuests();
     }
 
     const initializeQuests = () => {
