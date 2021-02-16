@@ -1,5 +1,4 @@
 import { questStructurer } from './../quest/questStructurer.js';
-import { questInterfacer } from './../quest/questInterfacer.js';
 import { taskRenderer } from './taskRenderer.js';
 import { functionRenderer } from './functionRenderer.js';
 import { uiInterfacer } from './uiInterfacer.js';
@@ -59,7 +58,7 @@ const questRenderer = (() => {
     const renderNewQuest = () => {
         let questButton = null;
 
-        if(functionRenderer.getNewQuestPrompt() === true) {
+        if ( functionRenderer.getNewQuestPrompt() === true ) {
             questButton = functionRenderer.createAddPrompt(true);
         } else {
             questButton = functionRenderer.createAddButton(true);
@@ -103,7 +102,7 @@ const questRenderer = (() => {
     const renderNewTask = () => {
         let taskButton = null;
 
-        if(functionRenderer.getNewTaskPrompt() === true) {
+        if ( functionRenderer.getNewTaskPrompt() === true ) {
             taskButton = functionRenderer.createAddPrompt(false);
         } else {
             taskButton = functionRenderer.createAddButton(false);
@@ -113,7 +112,7 @@ const questRenderer = (() => {
     }
 
     const renderTasks = (tasks) => {
-        for (let i = 0; i < tasks.length; i++) {
+        for ( let i = 0; i < tasks.length; i++ ) {
             let newTask = taskRenderer.render(tasks[i], displayedQuest, i);
 
             taskSection.appendChild(newTask);
@@ -152,7 +151,6 @@ const questRenderer = (() => {
         } else {
             return [];
         }
-        
     }
 
     return {

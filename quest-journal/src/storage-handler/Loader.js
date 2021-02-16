@@ -9,7 +9,6 @@ const Loader = (() => {
         loadTaskLengths(0, questLength);
 
         loadQuests();
-        //loadTasks();
     }
 
     const loadQuestLength = () => {
@@ -18,7 +17,7 @@ const Loader = (() => {
         if ( typeof(temp) === "number" ) {
             temp = parseInt(temp);
 
-            if (typeof(temp) === "number") {
+            if ( typeof(temp) === "number" ) {
                 questLength = temp;
             }
         } else {
@@ -35,7 +34,7 @@ const Loader = (() => {
     
             taskLengths.push(taskLength);
     
-            if ((start + 1) === questLength) {
+            if ( (start + 1) === questLength ) {
             } else {
                 loadTaskLengths((start + 1), questLength);
             }
@@ -43,7 +42,7 @@ const Loader = (() => {
     }
 
     const loadQuests = () => {
-        for (let i = 0; i < questLength; i++) {
+        for ( let i = 0; i < questLength; i++ ) {
             let indexString = String(i);
             let finalKey = "quest" + i;
 
@@ -59,7 +58,7 @@ const Loader = (() => {
         let taskLength = taskLengths[questIndex];
         finalKey += "task";
 
-        for (let i = 0; i < taskLength; i++) {
+        for ( let i = 0; i < taskLength; i++ ) {
             let finalTaskKey = finalKey + i;
             let taskDescription = localStorage.getItem(finalTaskKey);
             console.log("LOAD:" + taskDescription);

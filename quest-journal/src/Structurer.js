@@ -3,7 +3,7 @@ const Structurer = (() => {
         let newElement = elements.shift();
         container.appendChild(newElement);
 
-        if (elements.length === 0) {
+        if ( elements.length === 0 ) {
             return container;
         } else {
             appendChildren(container, elements);
@@ -14,7 +14,7 @@ const Structurer = (() => {
         let newClass = classes.shift();
         element.classList.add(newClass);
 
-        if( classes.length === 0) {
+        if ( classes.length === 0 ) {
             return element;
         } else {
             addClasses(element, classes);

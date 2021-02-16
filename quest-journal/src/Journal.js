@@ -7,21 +7,7 @@ import { Loader } from './storage-handler/Loader.js';
 const Journal = (() => {
     const initializeJournal = () => {
         questRenderer.initializeJournal();
-        //unitTest.testProcess();
-        console.log("Journal initialized...");
         Loader.load();
-        console.log("Loaded existing sotrage...");
-        //addSampleQuests();
-        //initializeQuests();
-    }
-
-    const initializeQuests = () => {
-        let questTitles = questRenderer.getQuestTitles();
-
-        questRenderer.renderQuestTab(questTitles);
-
-        let displayedQuest = questRenderer.getDisplayedQuestIndex();
-        questRenderer.renderTaskTab(questRenderer.getTasks());
     }
 
     const addSampleQuests = () => {

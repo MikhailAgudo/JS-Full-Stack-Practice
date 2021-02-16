@@ -8,7 +8,7 @@ const functionRenderer = (() => {
     let newTask = false;
 
     const toggleQuest = () => {
-        if (newQuest === false) {
+        if ( newQuest === false ) {
             newQuest = true;
         } else {
             newQuest = false;
@@ -16,7 +16,7 @@ const functionRenderer = (() => {
     }
 
     const toggleTask = () => {
-        if (newTask === false) {
+        if ( newTask === false ) {
             newTask = true;
         } else {
             newTask = false;

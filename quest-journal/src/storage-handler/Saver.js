@@ -9,7 +9,7 @@ const Saver = (() => {
 
         saveLengths();
 
-        for (let i = 0; i < questLength; i++) {
+        for ( let i = 0; i < questLength; i++ ) {
             let quest = questStructurer.getQuest(i);
             saveQuest(i, quest);
         }
@@ -38,7 +38,7 @@ const Saver = (() => {
 
         localStorage.setItem(finalKey, taskLength);
 
-        if (tasks.length === 0) {
+        if ( tasks.length === 0 ) {
 
         } else {
             saveTaskLengths(indexStart + 1);
@@ -57,7 +57,7 @@ const Saver = (() => {
     }
 
     const saveTasks = (tasks, questFinalKey) => {
-        for (let i = 0; i < tasks.length; i++) {
+        for ( let i = 0; i < tasks.length; i++ ) {
             let finalKey = questFinalKey;
             finalKey += "task";
             finalKey += i;
@@ -78,7 +78,7 @@ const Saver = (() => {
 
         tasks = [];
 
-        for (let i = 0; i < quests.length; i++) {
+        for ( let i = 0; i < quests.length; i++ ) {
             let quest = quests[i];
             let taskAmount = quest.getTaskAmount();
             tasks.push(taskAmount);
