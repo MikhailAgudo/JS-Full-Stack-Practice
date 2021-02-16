@@ -9,29 +9,36 @@ const Loader = (() => {
         loadTaskLengths(0, questLength);
 
         loadQuests();
-        loadTasks();
+        //loadTasks();
     }
 
     const loadQuestLength = () => {
         let temp = localStorage.getItem("questLength");
-        temp = parseInt(temp);
 
-        if (typeof(temp) === "number") {
-            questLength = temp;
+        if ( typeof(temp) === "number" ) {
+            temp = parseInt(temp);
+
+            if (typeof(temp) === "number") {
+                questLength = temp;
+            }
+        } else {
+            questLength = 0;
         }
     }
 
     const loadTaskLengths = (start, questLength) => {
-        let startString = String(start);
-        let finalKey = "quest" + startString + "taskLength";
-
-        let taskLength = localStorage.getItem(finalKey);
-
-        taskLengths.push(taskLength);
-
-        if ((start + 1) === questLength) {
-        } else {
-            loadTaskLengths((start + 1), questLength);
+        if ( questLength > 0 && typeof(questLength) === "number" ) {
+            let startString = String(start);
+            let finalKey = "quest" + startString + "taskLength";
+    
+            let taskLength = localStorage.getItem(finalKey);
+    
+            taskLengths.push(taskLength);
+    
+            if ((start + 1) === questLength) {
+            } else {
+                loadTaskLengths((start + 1), questLength);
+            }
         }
     }
 
