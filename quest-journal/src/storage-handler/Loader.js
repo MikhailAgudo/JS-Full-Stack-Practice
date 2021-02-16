@@ -14,7 +14,7 @@ const Loader = (() => {
     const loadQuestLength = () => {
         let temp = localStorage.getItem("questLength");
 
-        if ( typeof(temp) === "number" ) {
+        if ( typeof(temp) === "string" ) {
             temp = parseInt(temp);
 
             if ( typeof(temp) === "number" ) {

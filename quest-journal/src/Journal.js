@@ -6,8 +6,8 @@ import { Loader } from './storage-handler/Loader.js';
 
 const Journal = (() => {
     const initializeJournal = () => {
-        questRenderer.initializeJournal();
         Loader.load();
+        questRenderer.initializeJournal();
     }
 
     const addSampleQuests = () => {
