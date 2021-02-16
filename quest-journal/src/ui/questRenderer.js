@@ -57,9 +57,9 @@ const questRenderer = (() => {
         let questButton = null;
 
         if(functionRenderer.getNewQuestPrompt() === true) {
-            questButton = functionRenderer.createAddQuestPrompt();
+            questButton = functionRenderer.createAddPrompt(true);
         } else {
-            questButton = functionRenderer.createAddQuestButton();
+            questButton = functionRenderer.createAddButton(true);
         }
         
         questSection.appendChild(questButton);
@@ -101,9 +101,9 @@ const questRenderer = (() => {
         let taskButton = null;
 
         if(functionRenderer.getNewTaskPrompt() === true) {
-            taskButton = functionRenderer.createAddTaskPrompt();
+            taskButton = functionRenderer.createAddPrompt(false);
         } else {
-            taskButton = functionRenderer.createAddTaskButton();
+            taskButton = functionRenderer.createAddButton(false);
         }
         
         taskSection.appendChild(taskButton);

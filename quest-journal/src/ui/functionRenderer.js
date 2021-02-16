@@ -31,6 +31,30 @@ const functionRenderer = (() => {
         return newTask;
     }
 
+    const createAddButton = (isQuest) => {
+        if ( isQuest === true ) {
+            return createAddQuestButton();
+        } else {
+            return createAddTaskButton();
+        }
+    }
+
+    const createAddPrompt = (isQuest) => {
+        if ( isQuest === true ) {
+            return createAddQuestPrompt();
+        } else {
+            return createAddTaskPrompt();
+        }
+    }
+
+    const createSubmitButton = (isQuest) => {
+        if ( isQuest === true ) {
+            return createSubmitQuestButton();
+        } else {
+            return createSubmitTaskButton();
+        }
+    }
+
     const createAddQuestButton = () => {
         let questButton = document.createElement("button");
         questButton.textContent = "New Quest";
@@ -123,10 +147,8 @@ const functionRenderer = (() => {
     return {
         getNewQuestPrompt,
         getNewTaskPrompt,
-        createAddQuestButton,
-        createAddQuestPrompt,
-        createAddTaskButton,
-        createAddTaskPrompt
+        createAddButton,
+        createAddPrompt
     }
 })();
 
