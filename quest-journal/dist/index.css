@@ -1,6 +1,8 @@
 .journal-section {
     display: flex;
     flex-direction: row;
+    align-self: center;
+    justify-content: center;
 }
 
 .quest-section {
@@ -15,6 +17,10 @@
     align-content: flex-start;
 }
 
+.quest-container {
+    border-radius: 1em;
+}
+
 .task-container {
     display: flex;
     flex-direction: row;
@@ -23,4 +29,17 @@
 
 .task-area {
     border: 1px solid black;
+    width: 10em;
+}
+
+.primary-bg-color {
+    background-color: #FDE88F;
+}
+
+.secondary-bg-color {
+    background-color: #DBFD8F;
+}
+
+.tertiary-bg-color {
+    background-color: #FDB18F;
 }

@@ -17,6 +17,10 @@ const taskRenderer = (() => {
             taskDescription
         ]);
 
+        Structurer.addClasses(newTask, [
+            'primary-bg-color'
+        ]);
+
         return newTask;
     }
 
