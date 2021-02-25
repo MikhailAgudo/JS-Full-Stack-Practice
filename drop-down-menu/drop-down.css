@@ -1,0 +1,8 @@
+.drop-down-invisible {
+    display: none;
+    border: solid black 1px;
+}
+
+.normal-width {
+    width: 10em;
+}
